@@ -27,6 +27,7 @@ body {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"],
 select {
     font-weight: 400;
@@ -38,12 +39,14 @@ select {
 }
 
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="password"]:focus {
     color: $main-blue;
     border-color: #999;
 }
 
 input[type="text"]:focus + div,
+input[type="email"]:focus + div,
 input[type="password"]:focus + div {
     border-color: #999;
 }
@@ -337,7 +340,13 @@ header {
         width: 100%;
         margin: 60px 0;
     }
+
+    button {
+        border: 0;
+    }
+
     input[type="text"],
+    input[type="email"],
     input[type="password"] {
         order: 2;
         flex-grow: 1;
@@ -361,6 +370,10 @@ header {
         padding: 15px 20px;
         border: 1px solid #d7d7d7;
         box-sizing: border-box;
+    }
+    &__err-msg {
+        color: $main-red;
+        font-size: .875rem;
     }
     &__ribbon {
         margin-right: -70px;
@@ -966,7 +979,7 @@ header {
             }
         }
     }
-    &--red {
+    &--red-bg {
         background-color: $main-red;
     }
 }
