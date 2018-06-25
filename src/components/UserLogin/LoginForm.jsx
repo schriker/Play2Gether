@@ -1,40 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Submit from '../UI/Submit';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { CSSTransition } from 'react-transition-group';
 
-class LoginForm extends Component {
+const LoginForm = (props) => {
+    
+    let showErr = false;
 
-    state = {
-        formTouched: false
+    if(props.touched.email && props.errors.email) {
+        showErr = true;
+    }
+    if(props.touched.password && props.errors.password) {
+        showErr = true;
     }
 
-    onFormSubmit = () => {
-        this.setState({ formTouched: true });
-    }
-
-    render() { 
-        return (        
-            <Form>
-                {this.state.formTouched && this.props.errors.email ? <p className="login-box__err-msg">{this.props.errors.email}</p>: null}
-                <div className="login-box__row">
-                    <Field type="text" name="email" placeholder="Email adress" />
-                    <div className="login-box__input-icon"><i className="fas fa-user"></i></div>
+    return (        
+        <Form>
+            <CSSTransition in={showErr} timeout={200} classNames="fade" mountOnEnter unmountOnExit>
+                <div className="login-box__err-msg">
+                    {props.touched.email && props.errors.email ? <p>{props.errors.email}</p> : null}
+                    {props.touched.password && props.errors.password ? <p>{props.errors.password}</p> : null}
                 </div>
-                {this.state.formTouched && this.props.errors.password ? <p className="login-box__err-msg">{this.props.errors.password}</p>: null}
-                <div className="login-box__row">
-                    <Field type="password" name="password" placeholder="Your password" />
-                    <div className="login-box__input-icon"><i className="fas fa-key"></i></div>
-                </div>
-                <div className="login-box__row">
-                    <Submit onClick={()=> this.onFormSubmit()}  isSending={this.props.isSending} value="Login" />
-                    <span>or</span>
-                    <a className="btn btn--grey" href="/">Sign Up</a>
-                    <a className="pull-right" href="">Forgot password?</a>
-                </div>
-            </Form>
-        )
-    };
+            </CSSTransition>
+            <div className="login-box__row">
+                <Field type="text" name="email" placeholder="Email adress" />
+                <div className="login-box__input-icon"><i className="fas fa-user"></i></div>
+            </div>
+            <div className="login-box__row">
+                <Field type="password" name="password" placeholder="Your password" />
+                <div className="login-box__input-icon"><i className="fas fa-key"></i></div>
+            </div>
+            <div className="login-box__row">
+                <Submit isSending={props.isSending} value="Login" />
+                <span>or</span>
+                <a onClick={(e) => props.showRegister(e)} className="btn btn--grey" href="/">Sign Up</a>
+                <a className="pull-right" href="">Forgot password?</a>
+            </div>
+        </Form>
+    );
 };
 
 const FormikOptions = {
@@ -45,8 +49,8 @@ const FormikOptions = {
         }
     },
     validationSchema: () => Yup.object().shape({
-        email: Yup.string().email("E-mail is not valid!").required("E-mail is required!"),
-        password: Yup.string().min(6, "At least 6 characters!").required("Password is required!"),
+        email: Yup.string().email("Email is invalid!").required("Email is required!"),
+        password: Yup.string().min(6, "Password min. 6 characters long!").required("Password is required!"),
     }),
     handleSubmit: (values) => {
         console.log(values);

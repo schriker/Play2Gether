@@ -5,7 +5,7 @@ const Submit = (props) => {
     return (
         <div className="loader-container">
             { props.isSending ? <Loader /> : null }
-            <button onClick={props.onClick} className="btn btn--red">{props.value}</button>
+            <button className="btn btn--red">{props.value}</button>
         </div>
     );
 };
