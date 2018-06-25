@@ -1,28 +1,20 @@
 import React from 'react';
 import Submit from '../UI/Submit';
+import ErrorsList from '../UI/ErrorsList';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { CSSTransition } from 'react-transition-group';
 
 const LoginForm = (props) => {
     
     let showErr = false;
 
-    if(props.touched.email && props.errors.email) {
-        showErr = true;
-    }
-    if(props.touched.password && props.errors.password) {
+    if(Object.keys(props.errors).length > 0) {
         showErr = true;
     }
 
     return (        
         <Form>
-            <CSSTransition in={showErr} timeout={200} classNames="fade" mountOnEnter unmountOnExit>
-                <div className="login-box__err-msg">
-                    {props.touched.email && props.errors.email ? <p>{props.errors.email}</p> : null}
-                    {props.touched.password && props.errors.password ? <p>{props.errors.password}</p> : null}
-                </div>
-            </CSSTransition>
+            <ErrorsList errors={props.errors} showErr={showErr} />
             <div className="login-box__row">
                 <Field type="text" name="email" placeholder="Email adress" />
                 <div className="login-box__input-icon"><i className="fas fa-user"></i></div>
@@ -41,20 +33,22 @@ const LoginForm = (props) => {
     );
 };
 
-const FormikOptions = {
+const formikOptions = {
     mapPropsToValues: () => {
         return {
             email: "",
             password: ""
         }
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     validationSchema: () => Yup.object().shape({
         email: Yup.string().email("Email is invalid!").required("Email is required!"),
-        password: Yup.string().min(6, "Password min. 6 characters long!").required("Password is required!"),
+        password: Yup.string().min(6, "Password min. 6 characters long!").required("Password is required!")
     }),
     handleSubmit: (values) => {
         console.log(values);
     }
 };
 
-export default withFormik(FormikOptions)(LoginForm);
+export default withFormik(formikOptions)(LoginForm);

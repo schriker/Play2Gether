@@ -58,7 +58,8 @@ input[type="submit"] {
 }
 
 input[type="checkbox"] {
-    display: none;
+    position: absolute;
+    opacity: 0;
     +label::before {
         content: '';
         text-align: center;
@@ -352,7 +353,7 @@ header {
         font-size: 2.25rem;
         font-weight: 600;
         line-height: 3rem;
-        margin: 0 0 35px 0;
+        margin: 0 0 50px 0;
     }
     h2 {
         font-weight: 700;
@@ -399,6 +400,7 @@ header {
         margin-bottom: 35px;
         p {
         width: 100%;
+        min-height: 40px;
         box-sizing: border-box;
         background-color: $err-msg-bg;
         border-left: 10px solid $err-msg-border;
@@ -413,6 +415,9 @@ header {
         margin-right: -70px;
         display: flex;
         align-items: center;
+    }
+    &__register {
+        margin: 0 !important;
     }
 }
 
@@ -894,7 +899,7 @@ header {
         input[type="text"] {
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 35px;
+            // margin-bottom: 35px;
         }
         select {
             width: 100%;
