@@ -23,7 +23,7 @@ class UserLogin extends Component {
             <div className="login-box">
                 <RegisterForm hideRegister={() => this.hideRegister()} showRegister={this.state.showRegister} />
                 <h1>Play your game with <span className="text-red">not random </span>players.</h1>
-                <LoginForm showRegister={(e) => this.showRegister(e)} isSending={false} />
+                <LoginForm showRegister={(e) => this.showRegister(e)} />
                 <div className="login-box__row">
                     <Ribbon pullRight title="PUBG" players="942" rooms="125" />
                 </div>
