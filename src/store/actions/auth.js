@@ -58,3 +58,18 @@ export const authRegister = (email, password) => {
         .catch((err) => dispatch(registerFail(err)))
     }
 }
+
+const logoutSuccess = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT,
+        user: null
+    }
+}
+
+export const authLogout = () => {
+    return dispatch => {
+        firebase.auth().signOut()
+        .then(() => dispatch(logoutSuccess()))
+        .catch(() => dispatch(logoutSuccess()))
+    }
+}

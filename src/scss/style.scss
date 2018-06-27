@@ -28,6 +28,11 @@ body {
     background-size: cover;
 }
 
+button {
+    border: 0;
+    outline: none;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -58,8 +63,7 @@ input[type="submit"] {
 }
 
 input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
+    display: none;
     +label::before {
         content: '';
         text-align: center;
@@ -344,7 +348,7 @@ header {
 .login-box {
     background-color: $basic-white;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
-    margin: 120px 0 0 120px;
+    margin: 90px 0 0 90px;
     padding: 60px 60px 25px 60px;
     max-width: 675px;
     box-sizing: border-box;
@@ -459,6 +463,11 @@ header {
         background-color: #292f43;
         border-radius: 50%;
         padding: 26px 32px; 
+        .sidebar__number {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
     }
     &__number {
         border-radius: 50%;
@@ -466,17 +475,16 @@ header {
         background-color: $main-red;
         font-size: 0.9rem;
     }
-    .avatar-number {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-    }
     &__username {
         flex: 0 0 auto; 
-        font-size: 1.25rem;
+        font-size: 1.10rem;
         margin: 25px 0;
     }
     &__nav {
+        .sidebar__number {
+            display: inline-block;
+            margin-left: 15px;
+        }
         width: 100%;
         li:last-child {
             margin: 40px 0;

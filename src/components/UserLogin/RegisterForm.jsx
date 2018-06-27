@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Modal from '../UI/Modal';
 import Submit from '../UI/Submit';
 import ErrorsList from '../UI/ErrorsList';
@@ -8,27 +8,25 @@ import { withFormik, Form, Field } from 'formik';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 
-class RegisterForm extends Component {
-
-    render() {
+const RegisterForm = (props) => {
         let showErr = false;
         const errorsArray = [];
 
-        if (Object.keys(this.props.errors).length > 0)  {
+        if (Object.keys(props.errors).length > 0)  {
             showErr = true;
-            for (let key in this.props.errors) {
-                errorsArray.push(this.props.errors[key]);
+            for (let key in props.errors) {
+                errorsArray.push(props.errors[key]);
             }
         }
 
-        if (Object.keys(this.props.registerErr).length > 0)  {
+        if (Object.keys(props.registerErr).length > 0)  {
             showErr = true;
-            errorsArray.push(this.props.registerErr.message);
+            errorsArray.push(props.registerErr.message);
         }
     
         return (
-            <CSSTransition in={this.props.showRegister} timeout={200} classNames="fade" mountOnEnter unmountOnExit>
-                <Modal close={this.props.hideRegister} title="Create User">
+            <CSSTransition in={props.showRegister} timeout={200} classNames="fade" mountOnEnter unmountOnExit>
+                <Modal close={props.hideRegister} title="Create User">
                     <Form className="login-box__register">
                         <ErrorsList errors={errorsArray} showErr={showErr} />
                         <div className="login-box__row">
@@ -44,13 +42,12 @@ class RegisterForm extends Component {
                             <label htmlFor="privacy">Agree terms of use.</label>
                         </div>
                         <div className="login-box__row">
-                            <Submit isSending={this.props.registerLoading} value="Login" />
+                            <Submit isSending={props.registerLoading} value="Login" />
                         </div>
                     </Form>
                 </Modal>
             </CSSTransition>
         );
-    }
 };
 
 const formikOptions = {

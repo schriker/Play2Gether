@@ -1,15 +1,13 @@
 import React, { Fragment } from 'react';
 import Header from '../Header/Header';
-import UserLogin from '../UserLogin/UserLogin';
 
-const Layout = () => {
+
+const Layout = (props) => {
     return (
         <Fragment>
             <Header />
             <div className="container">
-                {/* if !UserLogedIn */}
-                <UserLogin />
-                {/* if UserLogedIn */}
+                {props.children}
             </div>
         </Fragment>
     );

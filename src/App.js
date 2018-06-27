@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Layout from './components/Layout/Layout';
+import { connect } from 'react-redux';
+import UserLogin from './components/UserLogin/UserLogin';
+import Sidebar from './components/Sidebar/Sidebar';
 
 class App extends Component {
 
@@ -9,10 +12,30 @@ class App extends Component {
   
 
   render() {
+
+    let content = null;
+
+    if (!this.props.auth) {
+      content = <UserLogin />
+    }
+    else { 
+      content = (
+        <Sidebar />
+      )
+    }
+
     return (
-      <Layout />
+      <Layout>
+        {content}
+      </Layout>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth.user
+  }
+}
+
+export default connect(mapStateToProps)(App);

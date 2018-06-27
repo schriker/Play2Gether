@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Submit from '../UI/Submit';
 import ErrorsList from '../UI/ErrorsList';
+import Button from '../UI/Button';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 
-class LoginForm extends Component {
-    render() {
+const LoginForm = (props) => {
         let showErr = false;
         const errorsArray = [];
 
-        if (Object.keys(this.props.errors).length > 0)  {
+        if (Object.keys(props.errors).length > 0)  {
             showErr = true;
-            for (let key in this.props.errors) {
-                errorsArray.push(this.props.errors[key]);
+            for (let key in props.errors) {
+                errorsArray.push(props.errors[key]);
             }
         }
 
-        if (Object.keys(this.props.loginErr).length > 0)  {
+        if (Object.keys(props.loginErr).length > 0)  {
             showErr = true;
-            errorsArray.push(this.props.loginErr.message);
+            errorsArray.push(props.loginErr.message);
         }
 
         return (        
@@ -35,14 +35,13 @@ class LoginForm extends Component {
                     <div className="login-box__input-icon"><i className="fas fa-key"></i></div>
                 </div>
                 <div className="login-box__row">
-                    <Submit isSending={this.props.loginLoading} value="Login" />
+                    <Submit isSending={props.loginLoading} value="Login" />
                     <span>or</span>
-                    <a onClick={(e) => this.props.showRegister(e)} className="btn btn--grey" href="/">Sign Up</a>
+                    <Button value="Sign Up" type="grey" clicked={(e) => props.showRegister(e)} />
                     <a className="pull-right" href="">Forgot password?</a>
                 </div>
             </Form>
         );
-    }
 };
 
 const formikOptions = {
