@@ -42,3 +42,20 @@ export const fetchGames = () => {
         .catch((err) => dispatch(fethcGamesFail(err)))   
     }
 }
+
+const fetchThumbnailsSuccess = (id, url) => {
+    return {
+        type: actionTypes.FETCH_THUMBNAILS_SUCCESS,
+        id: id,
+        url: url
+    }
+}
+
+export const fetchThumbnails = (id, thumbnail) => {
+    return dispatch => {
+        let imgRef = firebase.storage().ref(`thumbnails/${thumbnail}`);
+        imgRef.getDownloadURL().then((url) => { 
+            dispatch(fetchThumbnailsSuccess(id, url))
+        });
+    }
+}

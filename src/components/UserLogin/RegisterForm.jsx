@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
                             <label htmlFor="privacy">Agree terms of use.</label>
                         </div>
                         <div className="login-box__row">
-                            <Submit isSending={props.registerLoading} value="Login" />
+                            <Submit isSending={props.registerLoading} value="Sign up" />
                         </div>
                     </Form>
                 </Modal>

@@ -4,7 +4,7 @@ import Loader from '../UI/Loader';
 const Submit = (props) => {
     return (
         <div className="loader-container">
-            { props.isSending ? <Loader /> : null }
+            { props.isSending ? <Loader type="red-bg" /> : null }
             <button className="btn btn--red">{props.value}</button>
         </div>
     );

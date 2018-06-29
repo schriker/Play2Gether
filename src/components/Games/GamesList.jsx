@@ -4,6 +4,7 @@ import SearchBar from '../UI/SearchBar';
 import Button from '../UI/Button';
 import Filter from '../UI/Filter';
 import GameItem from './GameItem';
+import Loader from '../UI/Loader';
 import * as actions from '../../store/actions/games';
 
 class GamesList extends Component {
@@ -13,6 +14,13 @@ class GamesList extends Component {
     }
 
     render() {
+        
+        let content = <Loader type="white-bg" />;
+
+        if(!this.props.isFetching) {
+            content = this.props.games.map((game) => <GameItem key={game.id} id={game.id} name={game.name} thumbnail={game.img} players={game.players} />);
+        }
+
         return (
             <div className="main-white">
                 <div className="search">
@@ -21,10 +29,18 @@ class GamesList extends Component {
                 </div>
                 <Filter />
                 <div className="games-list">
-                    <GameItem />
+                    {content}
                 </div>
             </div>
         );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        isFetching: state.games.isFetching,
+        games: state.games.games,
+        err: state.games.err
     }
 }
 
@@ -34,4 +50,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(GamesList);
+export default connect(mapStateToProps, mapDispatchToProps)(GamesList);

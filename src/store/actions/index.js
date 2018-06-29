@@ -5,4 +5,7 @@ export {
     authStateChange
 } from './auth';
 
-export { fetchGames } from './games';
+export { 
+    fetchGames,
+    fetchThumbnails 
+} from './games';

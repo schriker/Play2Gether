@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     isFetching: false,
     games: [],
+    thumbnails: {},
     err: null
 }
 
@@ -24,6 +25,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 err: action.err
+            }
+        case actionTypes.FETCH_THUMBNAILS_SUCCESS:
+            return {
+                ...state,
+                thumbnails: {
+                    ...state.thumbnails,
+                    [action.id]: action.url
+                }
             }
         default: return state
     }
