@@ -73,3 +73,10 @@ export const authLogout = () => {
         .catch(() => dispatch(logoutSuccess()))
     }
 }
+
+export const authStateChange = () => {
+    return dispatch => {
+        dispatch(authStart());
+        firebase.auth().onAuthStateChanged((user) => dispatch(authSuccess(user))) 
+    }
+}

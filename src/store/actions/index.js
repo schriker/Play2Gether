@@ -1,5 +1,8 @@
 export { 
     authLogin,
     authRegister,
-    authLogout
+    authLogout,
+    authStateChange
 } from './auth';
+
+export { fetchGames } from './games';

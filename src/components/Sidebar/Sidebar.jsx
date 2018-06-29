@@ -18,10 +18,10 @@ class Sidebar extends Component {
 
         return (
             <div className="sidebar">
-                <SidebarAvatar photo={this.props.auth.user.photoURL} notifications={notifications} />
+                <SidebarAvatar photo={this.props.user.photoURL} notifications={notifications} />
                 <div className="sidebar__username">
-                    <UserStatus online={this.props.auth} />
-                    {this.props.auth.user.displayName ? this.props.auth.user.displayName : this.props.auth.user.email}
+                    <UserStatus online={this.props.user} />
+                    {this.props.user.displayName ? this.props.user.displayName : this.props.user.email}
                 </div>
                 <SidebarNav notifications = {notifications} />
                 <Button value="Logout" clicked={() => this.props.logout()} type="grey-steam" />
@@ -35,7 +35,7 @@ class Sidebar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth.user
+        user: state.auth.user
     }
 }
 

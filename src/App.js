@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Layout from './components/Layout/Layout';
 import { connect } from 'react-redux';
 import UserLogin from './components/UserLogin/UserLogin';
 import Sidebar from './components/Sidebar/Sidebar';
+import GamesList from './components/Games/GamesList';
+import * as actions from './store/actions/index';
 
 class App extends Component {
 
   componentDidMount() {
-    document.getElementsByTagName('body')[0].classList.add('main-body-bg'); // Add if is main page!
+
+    this.props.authStateChange();
+    document.getElementsByTagName('body')[0].classList.add('main-body-bg');
   }
   
 
@@ -20,7 +24,12 @@ class App extends Component {
     }
     else { 
       content = (
-        <Sidebar />
+        <Fragment>
+          <Sidebar />
+          <div className="main">
+              <GamesList />
+          </div>
+        </Fragment>
       )
     }
 
@@ -32,10 +41,16 @@ class App extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authStateChange: () => dispatch(actions.authStateChange())
+  }
+}
+
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.user
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

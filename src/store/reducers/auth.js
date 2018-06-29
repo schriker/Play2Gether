@@ -8,7 +8,7 @@ const initailState = {
     registerLoading: false
 }
 
-const reducer = (state=initailState, action) => {
+const reducer = (state = initailState, action) => {
     switch(action.type) {
         case actionTypes.AUTH_START:
             return {
@@ -49,7 +49,7 @@ const reducer = (state=initailState, action) => {
                 ...state,
                 user: null
             }
-    default: return state
+        default: return state
     }
 }
 
