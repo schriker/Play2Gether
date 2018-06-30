@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Layout from './components/Layout/Layout';
 import { connect } from 'react-redux';
 import UserLogin from './components/UserLogin/UserLogin';
@@ -20,16 +20,20 @@ class App extends Component {
     let content = null;
 
     if (!this.props.auth) {
-      content = <UserLogin />
+      content = (
+        <div className="login-container">
+          <UserLogin />
+        </div>
+      )
     }
     else { 
       content = (
-        <Fragment>
+        <div className="container">
           <Sidebar />
           <div className="main">
               <GamesList />
           </div>
-        </Fragment>
+        </div>
       )
     }
 

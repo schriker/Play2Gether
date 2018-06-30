@@ -7,5 +7,6 @@ export {
 
 export { 
     fetchGames,
-    fetchThumbnails 
+    fetchThumbnails,
+    filterGames
 } from './games';

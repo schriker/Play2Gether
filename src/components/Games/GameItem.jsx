@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import * as action from '../../store/actions/index';
 import { connect } from 'react-redux';
+import placeholder from '../../img/placeholder.jpg';
+import Loader from '../UI/Loader';
 
 class GameItem extends Component {
+
+    state = {
+        imgLoaded: false 
+    }
+
+    imgLoaded = () => {
+        this.setState({imgLoaded: true});
+    }
 
     componentDidMount() {
         this.props.fetchThumbnail(this.props.id, this.props.thumbnail)
@@ -12,8 +22,13 @@ class GameItem extends Component {
     render() {
         return (
             <div className="game">
-                <a href={`/games/${this.props.id}`}>
-                    <img className="fluid-img" src={this.props.thumbnails[this.props.id]} alt={this.props.name} />
+                <a className="loader-container" href={`/games/${this.props.id}`}>
+                    <Loader type="grey-bg" />
+                    <img className="fluid-img" src={placeholder} alt="Placeholder" />
+                    <img 
+                        onLoad={() => this.imgLoaded()} 
+                        className={this.state.imgLoaded ? "fluid-img game__thumbnail" : "fluid-img game__thumbnail game__thumbnail--hide"} 
+                        src={this.props.thumbnails[this.props.id]} alt={this.props.name} />
                 </a>
                 <div className="game__info">
                     <div className="game__title">

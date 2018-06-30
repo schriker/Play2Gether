@@ -6,6 +6,7 @@ import Filter from '../UI/Filter';
 import GameItem from './GameItem';
 import Loader from '../UI/Loader';
 import * as actions from '../../store/actions/games';
+import { filterByValue } from '../../utility/filterHelper';
 
 class GamesList extends Component {
 
@@ -13,8 +14,12 @@ class GamesList extends Component {
         this.props.fetchGames();
     }
 
+    onSearchChange = (e) => {
+        this.props.onSearch(e.target.value);
+    }
+
     render() {
-        
+
         let content = <Loader type="white-bg" />;
 
         if(!this.props.isFetching) {
@@ -25,10 +30,10 @@ class GamesList extends Component {
             <div className="main-white">
                 <div className="search">
                     <Button type="grey" value="Add game" clicked={() => console.log("Add game")} />
-                    <SearchBar/>
+                    <SearchBar value={this.props.searchValue} onSearch={(e) => this.onSearchChange(e)} />
                 </div>
                 <Filter />
-                <div className="games-list">
+                <div className="games-list loader-container">
                     {content}
                 </div>
             </div>
@@ -39,14 +44,16 @@ class GamesList extends Component {
 const mapStateToProps = (state) => {
     return {
         isFetching: state.games.isFetching,
-        games: state.games.games,
-        err: state.games.err
+        games: filterByValue(state.games.games, state.games.searchValue),
+        err: state.games.err,
+        searchValue: state.games.searchValue
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchGames: () => dispatch(actions.fetchGames())
+        fetchGames: () => dispatch(actions.fetchGames()),
+        onSearch: (searchValue) => dispatch(actions.filterGames(searchValue))
     }
 }
 

@@ -13,14 +13,24 @@ $err-msg-bg: #ffdddd;
 $err-msg-border: #ff9e9e;
 $btn-grey: #5d6173;
 $btn-grey-dark: #4e5261;
+$loader-grey: #bababa;
+$loader-grey-bg: #f5f5f5;
 
 html {
-    font-size: 16px;  
+    font-size: 16px;
+    height: 100%;
 }
 
 body {
+    height: calc(100% - 80px);
     font-family: 'Poppins', sans-serif;
     background-color: $main-blue;
+}
+
+.root,
+.container,
+.main {
+    height: 100%;
 }
 
 .main-body-bg {
@@ -161,6 +171,10 @@ ul {
     height: auto;
 }
 
+.visibility-none {
+    visibility: hidden;
+}
+
 .text-red {
     color: $main-red;
 }
@@ -206,6 +220,7 @@ header {
     left: 0;
     top: 0;
     width: 100%;
+    height: 80px;
     z-index: 999;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -285,18 +300,24 @@ header {
 }
 
 .menu {
+    ul{
+        height: 80px;
+    }
     li {
+        height: 100%;
         float: left;
         list-style: none;
         margin: 0 50px 0 0;
     }
     a {
+        height: 100%;
         display: block;
         position: relative;
         font-weight: 500;
         font-size: 1.125rem;
         color: $basic-white;
         padding: 30px 0;
+        box-sizing: border-box;
         &:hover::after {
             content: "";
             bottom: 0;
@@ -340,15 +361,19 @@ header {
 .container {
     display: flex;
     width: 100%;
-    margin-top: 81px;
+    margin-top: 80px;
 }
 
 // Login Page Styles
 
+.login-container {
+    display: flex;
+}
+
 .login-box {
     background-color: $basic-white;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
-    margin: 90px 0 0 90px;
+    margin: 170px 90px 0 90px;
     padding: 60px 60px 25px 60px;
     max-width: 675px;
     box-sizing: border-box;
@@ -543,6 +568,9 @@ header {
 }
 
 .main-white {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
     width: 100%;
     color: #676767;
     font-size: 1rem;
@@ -605,6 +633,7 @@ header {
 }
 
 .games-list {
+    flex-grow: 1;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -617,8 +646,22 @@ header {
     margin: 0 15px;
     width: calc((100% - 210px) / 7);
     margin-bottom: 50px;
+    &__thumbnail {
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 900;
+        height: 100%;
+        &--hide {
+            opacity: 0;
+        }
+    }
+    a {
+        display: block;
+    }
     &:hover img {
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
         transition: all 0.2s ease;
     }
     img {
@@ -646,7 +689,7 @@ header {
     }
     &__fav {
         font-size: 1.375rem;
-        z-index: 999;
+        z-index: 800;
         &:hover {
             cursor: pointer;
             color: $main-red;
@@ -997,6 +1040,13 @@ header {
 }
 
 .loader {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 800;
+    width: 100%;
+    height: 100%;
     div {
         position: absolute;
         display: flex;
@@ -1027,22 +1077,21 @@ header {
         }
     }
     &--red-bg {
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        width: 100%;
-        height: 100%;
         background-color: $main-red;
         span {
             background-color: $basic-white;
         }
     }
     &--white-bg {
-        padding: 0 0 10px 15px;
+        background-color: $basic-white;
         span {
-            background-color: $btn-grey;
+            background-color: $loader-grey;
+        }
+    } 
+    &--grey-bg {
+        background-color: $loader-grey-bg;
+        span {
+            background-color: $loader-grey;
         }
     }   
 }

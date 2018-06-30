@@ -4,7 +4,8 @@ const initialState = {
     isFetching: false,
     games: [],
     thumbnails: {},
-    err: null
+    err: null,
+    searchValue: "",
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +34,11 @@ const reducer = (state = initialState, action) => {
                     ...state.thumbnails,
                     [action.id]: action.url
                 }
+            }
+        case actionTypes.FILTER_GAMES:
+            return {
+                ...state,
+                searchValue: action.searchValue
             }
         default: return state
     }

@@ -25,8 +25,7 @@ export const fetchGames = () => {
     return dispatch => {
         dispatch(fetchGamesStart());
 
-        firebase.firestore().collection("games").get()
-        .then((querySnapshot) => {
+        firebase.firestore().collection("games").onSnapshot((querySnapshot) => {
             let games= [];
             querySnapshot.forEach((doc)=> {
                 games = [
@@ -38,8 +37,7 @@ export const fetchGames = () => {
                 ]
             })
             dispatch(fetchGamesSuccess(games))
-        })
-        .catch((err) => dispatch(fethcGamesFail(err)))   
+        },(err) => dispatch(fethcGamesFail(err)));
     }
 }
 
@@ -57,5 +55,12 @@ export const fetchThumbnails = (id, thumbnail) => {
         imgRef.getDownloadURL().then((url) => { 
             dispatch(fetchThumbnailsSuccess(id, url))
         });
+    }
+}
+
+export const filterGames = (text) => {
+    return {
+        type: actionTypes.FILTER_GAMES,
+        searchValue: text
     }
 }
