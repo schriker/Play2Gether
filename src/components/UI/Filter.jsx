@@ -1,11 +1,11 @@
 import React from 'react';
+import FilterItem from './FilterItem';
 
-const Filter = () => {
+const Filter = (props) => {
     return (
         <div className="filters">
             <ul>
-                <li><a href="/"><i className="fas fa-sort"></i>Name</a></li>
-                <li><a href="/"><i className="fas fa-sort"></i>Players</a></li>
+                {props.options.map((option, id) => <FilterItem key={id} id={id} option={option} clicked={(id, method) => props.clicked(id, method)} />)}
             </ul>
         </div>
     );

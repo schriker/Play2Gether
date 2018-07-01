@@ -6,6 +6,10 @@ const initialState = {
     thumbnails: {},
     err: null,
     searchValue: "",
+    orderOption: {
+        value: "Players",
+        option: "DESC"
+    }
 }
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +43,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 searchValue: action.searchValue
+            }
+        case actionTypes.ORDER_GAMES: 
+            return {
+                ...state,
+                orderOption: action.orderOption
             }
         default: return state
     }

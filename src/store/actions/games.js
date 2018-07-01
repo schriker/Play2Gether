@@ -64,3 +64,10 @@ export const filterGames = (text) => {
         searchValue: text
     }
 }
+
+export const orderGames = (orderOption) => {
+    return {
+        type: actionTypes.ORDER_GAMES,
+        orderOption: orderOption
+    }
+}

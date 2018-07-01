@@ -15,7 +15,9 @@ class GameItem extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchThumbnail(this.props.id, this.props.thumbnail)
+        if (!this.props.thumbnails[this.props.id]) {
+            this.props.fetchThumbnail(this.props.id, this.props.thumbnail)
+        }
     }
     
 

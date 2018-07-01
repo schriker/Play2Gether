@@ -10,8 +10,41 @@ import { filterByValue } from '../../utility/filterHelper';
 
 class GamesList extends Component {
 
+    state = {
+        orderOptions: [
+            {
+                value: "Name",
+                option: null
+            },
+            {
+                value: "Players",
+                option: "DESC"
+            }
+        ]
+    }
+
     componentDidMount() {
         this.props.fetchGames();
+    }
+
+    onOrder = (id, orderMethod) => {
+        const resetArr = this.state.orderOptions.map((option) => {
+            return {
+                value: option.value,
+                option: null
+            }
+        });
+        const updatedOption = {
+            ...this.state.orderOptions[id],
+            option: orderMethod
+        };
+        const updatedArr = [
+            ...resetArr.slice(0, id),
+                updatedOption,
+            ...resetArr.slice(id + 1, this.state.orderOptions.length)
+        ]
+        this.setState({orderOptions: updatedArr});
+        this.props.orderGames(updatedOption);
     }
 
     onSearchChange = (e) => {
@@ -32,7 +65,7 @@ class GamesList extends Component {
                     <Button type="grey" value="Add game" clicked={() => console.log("Add game")} />
                     <SearchBar value={this.props.searchValue} onSearch={(e) => this.onSearchChange(e)} />
                 </div>
-                <Filter />
+                <Filter clicked={(id, method) => this.onOrder(id, method)} options={this.state.orderOptions} />
                 <div className="games-list loader-container">
                     {content}
                 </div>
@@ -44,16 +77,17 @@ class GamesList extends Component {
 const mapStateToProps = (state) => {
     return {
         isFetching: state.games.isFetching,
-        games: filterByValue(state.games.games, state.games.searchValue),
+        games: filterByValue(state.games.games, state.games.searchValue, state.games.orderOption),
         err: state.games.err,
-        searchValue: state.games.searchValue
+        searchValue: state.games.searchValue,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchGames: () => dispatch(actions.fetchGames()),
-        onSearch: (searchValue) => dispatch(actions.filterGames(searchValue))
+        onSearch: (searchValue) => dispatch(actions.filterGames(searchValue)),
+        orderGames: (orderOption) => dispatch(actions.orderGames(orderOption))
     }
 }
 
