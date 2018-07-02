@@ -620,6 +620,7 @@ header {
             list-style: none;
             margin-right: 30px;
             color: #676767;
+            user-select: none;
             i {
                 width: 16px;
                 height: 16px;
@@ -646,9 +647,8 @@ header {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 0 15px;
+    margin: 0 15px 40px 15px;
     width: calc((100% - 210px) / 7);
-    margin-bottom: 50px;
     &__thumbnail {
         opacity: 1;
         position: absolute;
@@ -678,8 +678,10 @@ header {
         border-bottom: 1px solid #ebebeb;
     }
     &__title {
+        flex-shrink: 1;
         padding: 0 0 15px 0;
         white-space: nowrap;
+        overflow: hidden;
         a {
             &:hover p{
                 color: $main-red;
@@ -696,7 +698,7 @@ header {
         font-style: normal;
         font-weight: 400;
         font-size: 1.375rem;
-        z-index: 800;
+        margin-left: 5px;
         &::after {
             content: '\f004'
         }
@@ -1192,3 +1194,29 @@ header {
         }
     }
  }
+
+ @media (max-width: 1320px) {
+    .game {
+       width: calc((100% - 80px) / 4);
+       margin: 0 10px 40px 10px;
+    }
+}
+
+ @media (max-width: 1440px) and (min-width: 1321px) {
+    .game {
+       width: calc((100% - 100px) / 5);
+       margin: 0 10px 40px 10px;
+    }
+}
+
+ @media (max-width: 1850px) and (min-width: 1441px) {
+     .game {
+        width: calc((100% - 180px) / 6);
+     }
+ }
+
+ @media (min-width: 2560px) {
+    .game {
+       width: calc((100% - 240px) / 8);
+    }
+}

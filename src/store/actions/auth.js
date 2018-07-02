@@ -52,11 +52,23 @@ const registerFail = (err) => {
     }
 }
 
+const setUserData = (uid) => {
+    return dispatch => {
+        firebase.firestore().collection("users").doc(uid.user.uid).set({
+            favGames: [],
+            favRooms: []
+        })
+    }
+}
+
 export const authRegister = (email, password) => {
     return dispatch => {
         dispatch(registerStart());
         firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then((user) => dispatch(registerSuccess(user)))
+        .then((user) => {
+            dispatch(setUserData(user))
+            dispatch(registerSuccess(user));
+        })
         .catch((err) => dispatch(registerFail(err)))
     }
 }
