@@ -9,7 +9,6 @@ import * as actions from './store/actions/index';
 class App extends Component {
 
   componentDidMount() {
-
     this.props.authStateChange();
     document.getElementsByTagName('body')[0].classList.add('main-body-bg');
   }

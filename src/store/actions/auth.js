@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import firebase from '../../firebase';
+import { fetchUserData } from './index';
 
 const authStart = () => {
     return {
@@ -20,6 +21,7 @@ const authFail = (err) => {
         err: err
     }
 }
+
 
 export const authLogin = (email, password) => {
     return dispatch => {
@@ -77,6 +79,11 @@ export const authLogout = () => {
 export const authStateChange = () => {
     return dispatch => {
         dispatch(authStart());
-        firebase.auth().onAuthStateChanged((user) => dispatch(authSuccess(user))) 
+        firebase.auth().onAuthStateChanged((user) => {
+        dispatch(authSuccess(user));
+        if (user) {
+            dispatch(fetchUserData(user.uid));
+            }
+        }) 
     }
 }

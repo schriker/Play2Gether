@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 import Filter from '../UI/Filter';
 import GameItem from './GameItem';
 import Loader from '../UI/Loader';
-import * as actions from '../../store/actions/games';
+import * as actions from '../../store/actions/index';
 import { filterByValue } from '../../utility/filterHelper';
 
 class GamesList extends Component {
@@ -56,7 +56,7 @@ class GamesList extends Component {
         let content = <Loader type="white-bg" />;
 
         if(!this.props.isFetching) {
-            content = this.props.games.map((game) => <GameItem key={game.id} id={game.id} name={game.name} thumbnail={game.img} players={game.players} />);
+            content = this.props.games.map((game) => <GameItem userFav={this.props.userData.favGames} key={game.id} id={game.id} name={game.name} thumbnail={game.img} players={game.players} />);
         }
 
         return (
@@ -80,6 +80,7 @@ const mapStateToProps = (state) => {
         games: filterByValue(state.games.games, state.games.searchValue, state.games.orderOption),
         err: state.games.err,
         searchValue: state.games.searchValue,
+        userData: state.userData.userData
     }
 }
 

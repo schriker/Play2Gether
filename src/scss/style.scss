@@ -643,6 +643,8 @@ header {
 }
 
 .game {
+    display: flex;
+    flex-direction: column;
     position: relative;
     margin: 0 15px;
     width: calc((100% - 210px) / 7);
@@ -677,6 +679,7 @@ header {
     }
     &__title {
         padding: 0 0 15px 0;
+        white-space: nowrap;
         a {
             &:hover p{
                 color: $main-red;
@@ -689,11 +692,29 @@ header {
         }
     }
     &__fav {
+        font-family: 'Font Awesome 5 Free';
+        font-style: normal;
+        font-weight: 400;
         font-size: 1.375rem;
         z-index: 800;
+        &::after {
+            content: '\f004'
+        }
         &:hover {
             cursor: pointer;
             color: $main-red;
+        }
+        &--faved {
+            font-family: FontAwesome;
+            cursor: pointer;
+            color: $main-red;
+        }
+        &--clicked {
+            color: $main-red;
+            font-family: FontAwesome;
+            animation-name: favIcon;
+            animation-duration: .5s;
+            animation-timing-function: ease-in-out;
         }
     }
 }
@@ -1148,6 +1169,18 @@ header {
     100% {
         width: 100%;
         height: 5px;
+    }
+}
+
+@keyframes favIcon {
+    0% {
+        transform:  scale(0.8);
+    }
+    50% { 
+        transform:  scale(1.1);
+    }
+    100% {
+        transform:  scale(1);
     }
 }
 
