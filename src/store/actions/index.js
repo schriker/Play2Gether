@@ -2,7 +2,8 @@ export {
     authLogin,
     authRegister,
     authLogout,
-    authStateChange
+    authStateChange,
+    showMobileSidebar
 } from './auth';
 
 export { 

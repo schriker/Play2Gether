@@ -34,7 +34,7 @@ const LoginForm = (props) => {
                     <Field type="password" name="password" placeholder="Your password" />
                     <div className="login-box__input-icon"><i className="fas fa-key"></i></div>
                 </div>
-                <div className="login-box__row">
+                <div className="login-box__row login-box__buttons">
                     <Submit isSending={props.loginLoading} value="Login" />
                     <span>or</span>
                     <Button value="Sign Up" type="grey" clicked={(e) => props.showRegister(e)} />

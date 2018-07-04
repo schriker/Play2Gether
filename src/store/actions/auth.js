@@ -66,7 +66,7 @@ export const authRegister = (email, password) => {
         dispatch(registerStart());
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
-            dispatch(setUserData(user))
+            dispatch(setUserData(user));
             dispatch(registerSuccess(user));
         })
         .catch((err) => dispatch(registerFail(err)))
@@ -97,5 +97,12 @@ export const authStateChange = () => {
             dispatch(fetchUserData(user.uid));
             }
         }) 
+    }
+}
+
+export const showMobileSidebar = (show) => {
+    return {
+        type: actionTypes.SHOW_MOBILE_SIDEBAR,
+        show: show
     }
 }

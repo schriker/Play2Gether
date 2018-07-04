@@ -27,15 +27,16 @@ body {
     background-color: $main-blue;
 }
 
+.main-body-bg {
+    background: url(../img/main-bg.jpg) no-repeat center center fixed;
+    background-size: cover;
+    background-color: $main-blue;
+}
+
 .root,
 .container,
 .main {
     height: 100%;
-}
-
-.main-body-bg {
-    background: url(../img/main-bg.jpg) no-repeat center center fixed;
-    background-size: cover;
 }
 
 button {
@@ -53,6 +54,9 @@ select {
     border: 1px solid #d7d7d7;
     padding: 15px 20px;
     outline: 0;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 30px white inset;
+    -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
 input[type="text"]:focus,
@@ -231,6 +235,15 @@ header {
     box-sizing: border-box;
 }
 
+.mobile-burger {
+    display: none;
+    font-size: 1.5rem;
+    &:hover {
+        cursor: pointer;
+        color: $main-red;
+    }
+}
+
 .btn {
     position: relative;
     display: inline-block;
@@ -297,6 +310,14 @@ header {
 
 .logo {
     flex-grow: 1;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    &--mobile {
+        flex-direction: column;
+    }
 }
 
 .menu {
@@ -471,16 +492,24 @@ header {
 }
 
 .sidebar {
+    z-index: 999;
     position: fixed;
-    height: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
     color: $basic-white;
     font-size: 1rem;
     min-width: 250px;
     background-color: #1c2134;
-    padding-top: 40px;
+    &__content {
+        padding: 40px 0 0 0;
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        margin-bottom: 80px;
+        overflow-y: auto;
+        flex-direction: column;
+        align-items: center;
+    }
     &__avatar {
         flex: 0 0 auto;
         position: relative;
@@ -543,7 +572,7 @@ header {
                 content: "";
                 position: absolute;
                 top: 0;
-                right: -5px;
+                right: 0;
                 width: 25%;
                 height: 100%;
                 border-right: 5px solid $main-red;
@@ -556,14 +585,15 @@ header {
         color: $icons-blue;
         font-size: 0.75rem;
         text-transform: uppercase;
-        margin: 30px 0;
+        padding: 30px 0 0 0;
     }
 }
 
 .main {
+    margin-left: 250px;
+    height: 100%;
     flex-grow: 1;
     width: 100%;
-    margin-left: 250px;
     background-color: $basic-white;
 }
 
@@ -694,7 +724,7 @@ header {
         }
     }
     &__fav {
-        font-family: 'Font Awesome 5 Free';
+        font-family: 'Font Awesome\ 5 Free';
         font-style: normal;
         font-weight: 400;
         font-size: 1.375rem;
@@ -707,13 +737,15 @@ header {
             color: $main-red;
         }
         &--faved {
-            font-family: FontAwesome;
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 900;
             cursor: pointer;
             color: $main-red;
         }
         &--clicked {
             color: $main-red;
-            font-family: FontAwesome;
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 900;
             animation-name: favIcon;
             animation-duration: .5s;
             animation-timing-function: ease-in-out;
@@ -947,7 +979,6 @@ header {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
     z-index: 1000;
     &__header {
         font-weight: 700;
@@ -965,6 +996,7 @@ header {
         position: fixed;
         left: 50%;
         top: 50%;
+        z-index: 1000;
         transform: translate(-50.1%, -50.1%);
         width: 685px;
         max-width: 100%;
@@ -986,6 +1018,8 @@ header {
     }
     &__backdrop {
         position: fixed;
+        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.6);
         width: 100%;
         height: 100%;
     }
@@ -1195,10 +1229,135 @@ header {
     }
  }
 
- @media (max-width: 1320px) {
+ @media (max-width: 425px) {
+    .game {
+        width: calc((100% - 40px) / 2);
+        margin: 0 10px 40px 10px;
+    }
+ }
+
+ @media (max-width: 570px) {
+     .search {
+         button {
+             margin-bottom: 20px;
+         }
+         &__input {
+             margin: 0 !important;
+         }
+         flex-direction: column;
+     }
+ }
+
+ @media (max-width: 660px) {
+    .login-box {
+        margin: 170px 0 0 0;
+        padding: 40px 40px 0px 40px;
+        &__ribbon {
+            display: none;
+        }
+        &__buttons {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+ }
+
+ @media (max-width: 750px) and (min-width: 426px) {
+    .game {
+        width: calc((100% - 40px) / 2);
+        margin: 0 10px 40px 10px;
+    }
+ }
+
+ @media (max-width: 750px) {
+    header {
+        padding: 0 20px;
+    }
+ }
+
+ @media (max-width: 930px) {
+    .sidebar {
+        margin-left: -100%;
+        transition: all 0.2s ease;
+        &__mobile-show {
+            margin-left: 0;
+        }
+    }
+    .menu { 
+        ul {
+            height: 60px;
+        }
+        li {
+            margin: 0 10px;
+        }
+        a {
+            padding: 20px 0;
+        }
+    }
+    .socials {
+        margin-top: 10px;
+        li:first-child,
+        li:last-child {
+            margin: 0;
+        }
+    }
+    .hide-mobile-s {
+        display: none;
+    }
+    .show-mobile-s {
+        display: inline-block;
+    }
+    .main {
+        margin-left: 0px;
+    }
+    .search {
+        justify-content: space-between;
+        button {
+            position: initial;
+        }
+        &__input {
+            flex-grow: 1;
+            margin-left: 15px;
+            input[type="text"] {
+            width: calc(100% - 60px);
+            min-width: auto;
+            }
+        }
+    }
+ }
+
+ @media (max-width: 930px) and (min-width: 501px) {
+    .game {
+        width: calc((100% - 60px) / 3);
+        margin: 0 10px 40px 10px;
+     }
+ }
+
+ @media (max-width: 930px) and (min-width: 751px) {
+    header {
+        padding: 0 20px;
+    }
+}
+
+@media (min-width: 931px) {
+    .hide-desktop {
+        display: none;
+    }
+}
+
+ @media (max-width: 1320px) and (min-width: 931px) {
     .game {
        width: calc((100% - 80px) / 4);
        margin: 0 10px 40px 10px;
+    }
+    .search {
+        justify-content: space-between;
+        button {
+            position: initial;
+        }
+        &__input {
+            flex-grow: 0;
+        }
     }
 }
 

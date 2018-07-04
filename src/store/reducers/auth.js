@@ -5,7 +5,8 @@ const initailState = {
     loginErr: {},
     loginLoading: false,
     registerErr: {},
-    registerLoading: false
+    registerLoading: false,
+    showMobileSidebar: false
 }
 
 const reducer = (state = initailState, action) => {
@@ -48,6 +49,11 @@ const reducer = (state = initailState, action) => {
             return {
                 ...state,
                 user: null
+            }
+        case actionTypes.SHOW_MOBILE_SIDEBAR: 
+            return {
+                ...state,
+                showMobileSidebar: action.show
             }
         default: return state
     }
