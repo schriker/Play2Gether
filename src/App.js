@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Layout from './components/Layout/Layout';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UserLogin from './components/UserLogin/UserLogin';
 import Sidebar from './components/Sidebar/Sidebar';
 import GamesList from './components/Games/GamesList';
+import RoomsList from './components/RoomsList/RoomsList';
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -20,27 +22,33 @@ class App extends Component {
 
     if (!this.props.auth) {
       content = (
-        <div className="login-container">
-          <UserLogin />
-        </div>
+        <Router>
+          <Layout>
+            <div className="login-container">
+              <UserLogin />
+            </div>
+          </Layout>
+        </Router>
       )
     }
     else { 
       content = (
-        <div className="container">
-          <Sidebar />
-          <div className="main">
-              <GamesList />
-          </div>
-        </div>
+        <Router>
+          <Layout>
+            <div className="container">
+              <Sidebar />
+              <div className="main loader-container">
+                <Switch>
+                  <Route path="/game/:id" component={RoomsList}></Route>
+                  <Route path="/" component={GamesList} />
+                </Switch>
+              </div>
+            </div>
+          </Layout>
+        </Router>
       )
     }
-
-    return (
-      <Layout>
-        {content}
-      </Layout>
-    );
+    return (content);
   }
 }
 

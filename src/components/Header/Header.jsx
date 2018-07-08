@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
 import Navigation from './Navigation/Navigation';
 import Social from './Navigation/Social';
@@ -12,7 +13,7 @@ class Header extends Component {
         return (
             <header>
                 <div className="logo">
-                    <a href="/"><img src={logo} alt="Play2Gether" /></a>
+                    <Link to="/"><img src={logo} alt="Play2Gether" /></Link>
                 </div>
                 <div className="hide-mobile-s navigation">
                     <Navigation />

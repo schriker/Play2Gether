@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchBar from '../UI/SearchBar';
 import Button from '../UI/Button';
-import Filter from '../UI/Filter';
+import Filter from '../Filter/Filter';
 import GameItem from './GameItem';
 import Loader from '../UI/Loader';
 import * as actions from '../../store/actions/index';
@@ -25,6 +25,15 @@ class GamesList extends Component {
 
     componentDidMount() {
         this.props.fetchGames();
+    }
+
+    componentWillUnmount() { 
+        const defaultOption = {
+                value: "Players",
+                option: "DESC"
+        }
+        this.props.orderGames(defaultOption);
+        this.props.onSearch("");
     }
 
     onOrder = (id, orderMethod) => {
@@ -52,7 +61,6 @@ class GamesList extends Component {
     }
 
     render() {
-
         let content = <Loader type="white-bg" />;
 
         if(!this.props.isFetching) {

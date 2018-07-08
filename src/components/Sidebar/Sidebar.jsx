@@ -12,6 +12,10 @@ import * as actions from '../../store/actions/index';
 
 class Sidebar extends Component {
 
+    componentWillUnmount() {
+        this.props.toggleSidebar(false);
+    }
+
     render() {
 
         const notifications = {

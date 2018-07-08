@@ -37,7 +37,7 @@ export const fetchGames = () => {
                 ]
             })
             dispatch(fetchGamesSuccess(games))
-        },(err) => dispatch(fethcGamesFail(err)));
+        }, (err) => dispatch(fethcGamesFail(err)));
     }
 }
 

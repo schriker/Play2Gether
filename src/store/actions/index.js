@@ -17,3 +17,7 @@ export {
     fetchUserData,
     favGame
 } from './userData';
+
+export {
+    fetchRooms
+} from './rooms';

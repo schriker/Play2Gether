@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    isFetching: false,
+    isFetching: true,
     games: [],
     thumbnails: {},
     err: null,

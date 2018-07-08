@@ -100,6 +100,8 @@ input[type="checkbox"] {
     &:checked {
         &+label::before {
             border-color: #d7d7d7;
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 900;
             content: '\f00c';
             color: $main-red;
             animation-name: checkbox-effect;
@@ -138,6 +140,8 @@ input[type="radio"] {
     &:checked {
         &+label::before {
             border-color: #d7d7d7;
+            font-family: 'Font Awesome\ 5 Free';
+            font-weight: 900;
             content: '\f111';
             color: $main-red;
             animation-name: radio-effect;
@@ -765,8 +769,15 @@ header {
     background-size: cover;
     box-sizing: border-box;
     margin-bottom: 25px;
-    img {
+    a {
         margin-bottom: -50px;
+        &:hover img {
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+        img {
+            transition: all 0.2s ease;
+        }
     }
 }
 
