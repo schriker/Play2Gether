@@ -24,18 +24,19 @@ export const fetchUserData = (uid) => {
     }
 }
 
-const favGameSuccess = (favGames) => {
+const addToFavSuccess = (type, favArray) => {
     return {
-        type: actionTypes.FAV_GAME_SUCCESS,
-        favGames: favGames
+        type: actionTypes.ADD_TO_FAV_SUCCESS,
+        content: type,
+        array: favArray
     }
 }
 
-export const favGame = (favGames, uid) => {
+export const addToFav = (type, favArray, uid) => {
     return dispatch => {
         firebase.firestore().collection("users").doc(uid).update({
-            favGames: favGames
+            [type]: favArray
         })
-        .then(dispatch(favGameSuccess(favGames)))
+        .then(dispatch(addToFavSuccess(type, favArray)))
     }
 }

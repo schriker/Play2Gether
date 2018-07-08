@@ -15,7 +15,7 @@ export {
 
 export {
     fetchUserData,
-    favGame
+    addToFav
 } from './userData';
 
 export {

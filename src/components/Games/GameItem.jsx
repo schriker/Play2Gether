@@ -6,7 +6,7 @@ import GameThumbnail from './GameThumbnail';
 import FavButton from '../UI/FavButton';
 
 class GameItem extends Component {
-    
+
     componentDidMount() {
         if (!this.props.thumbnails[this.props.id]) {
             this.props.fetchThumbnail(this.props.id, this.props.thumbnail)
@@ -18,11 +18,11 @@ class GameItem extends Component {
 
         if(!fav) {
             favGames.push(this.props.id);
-            this.props.favGame(favGames, this.props.uid);
+            this.props.favGame("favGames", favGames, this.props.uid);
         }
         else {
             const removedFavGames = favGames.filter((item) => item !==  this.props.id);
-            this.props.favGame(removedFavGames, this.props.uid);
+            this.props.favGame("favGames", removedFavGames, this.props.uid);
         }
     }
     
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchThumbnail: (id, thumbnail) => dispatch(action.fetchThumbnails(id, thumbnail)),
-        favGame: (id, uid) => dispatch(action.favGame(id, uid))
+        favGame: (type, id, uid) => dispatch(action.addToFav(type, id, uid))
     }
 }
 

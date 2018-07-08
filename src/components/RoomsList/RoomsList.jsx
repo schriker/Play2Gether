@@ -15,8 +15,6 @@ class RoomsList extends Component {
 
         let game = this.props.rooms.rooms[this.props.match.params.id];
 
-        console.log(game);
-
         let contentHeader = <Loader type="white-bg" />;
         let roomsList = <Loader type="white-bg" />;
 
@@ -40,6 +38,8 @@ class RoomsList extends Component {
                             voiceChat={room.voiceChat}
                             tags={room.tags}
                             platform={room.platform}
+                            userFav={this.props.userData.favRooms}
+                            uid={this.props.uid}
                         />;
             });
         }
@@ -47,8 +47,10 @@ class RoomsList extends Component {
         return (
             <Fragment>
                 {contentHeader}
-                <div className="rooms">
-                    {roomsList}
+                <div className="main-white">
+                    <div className="rooms">
+                        {roomsList}
+                    </div>
                 </div>
             </Fragment>
         );
@@ -58,7 +60,9 @@ class RoomsList extends Component {
 const mapStateToProps = (state) => {
     return {
         thumbnails: state.games.thumbnails,
-        rooms: state.rooms
+        rooms: state.rooms,
+        userData: state.userData.userData,
+        uid: state.auth.user.uid
     }
 }
 

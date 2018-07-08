@@ -1,24 +1,45 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as action from '../../store/actions/index';
+import RoomPlayersNumber from './RoomPlayersNumber';
+import RoomHeader from './RoomHeader';
 import RoomOptions from './RoomOptions';
 import RoomTags from './RoomTags';
+import FavButton from '../UI/FavButton';
+import Button from '../UI/Button';
 
 class RoomsListItem extends Component {
+
+    favRoom(fav) {
+        const favRooms = [...this.props.userFav];
+
+        if(!fav) {
+            favRooms.push(this.props.id);
+            this.props.favRoom("favRooms", favRooms, this.props.uid);
+        }
+        else {
+            const removedfavRooms = favRooms.filter((item) => item !==  this.props.id);
+            this.props.favRoom("favRooms", removedfavRooms, this.props.uid);
+        }
+    }
+
     render() {
+
+        let isFaved = false;
+
+        if (this.props.userFav) {
+            isFaved = this.props.userFav.includes(this.props.id);
+        }
+
         return (
             <div className="single-room">
                 <div className="single-room__info">
-                    <div className="single-room__players">
-                        <i className="fas fa-users"></i>
-                        <span>2/4</span>
-                    </div>
-                    <div className="single-room__name">
-                        <h3><a href="/">Starlight Vision</a></h3>
-                        <p>20+ wins and mic required.</p>
-                    </div>
+                    <RoomPlayersNumber players={this.props.players} maxPlayers={4} />
+                    <RoomHeader name={this.props.name} desc={this.props.desc} />
                     <RoomTags tags={this.props.tags} />
                     <div className="single-room__join pull-right">
-                        <a href="/"><i className="far fa-heart pull-right"></i></a>
-                        <a href="/" className="btn btn--grey">Join</a>
+                        <FavButton isFaved={isFaved} favList={(fav) => this.favRoom(fav)} />
+                        <Button value="Join" clicked={() => console.log("Join room")} type="grey" />
                     </div>
                 </div>
                 <RoomOptions voiceChat={this.props.voiceChat} platform={this.props.platform} region={this.props.region} />
@@ -27,4 +48,10 @@ class RoomsListItem extends Component {
     }
 }
 
-export default RoomsListItem;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        favRoom: (type, id, uid) => dispatch(action.addToFav(type, id, uid))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(RoomsListItem);

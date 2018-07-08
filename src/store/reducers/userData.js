@@ -17,13 +17,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 err: action.err
             }
-        case actionTypes.FAV_GAME_SUCCESS: 
+        case actionTypes.ADD_TO_FAV_SUCCESS: 
             return {
                 ...state,
                 userData: {
                     ...state.userData,
-                    favGames: [
-                        ...action.favGames
+                    [action.content]: [
+                        ...action.array
                     ]
                 }
             }
