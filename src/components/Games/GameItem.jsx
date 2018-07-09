@@ -18,11 +18,11 @@ class GameItem extends Component {
 
         if(!fav) {
             favGames.push(this.props.id);
-            this.props.favGame("favGames", favGames, this.props.uid);
+            this.props.favGame({type: "favGames", array: favGames, uid: this.props.uid});
         }
         else {
             const removedFavGames = favGames.filter((item) => item !==  this.props.id);
-            this.props.favGame("favGames", removedFavGames, this.props.uid);
+            this.props.favGame({type: "favGames", array: removedFavGames, uid: this.props.uid});
         }
     }
     
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchThumbnail: (id, thumbnail) => dispatch(action.fetchThumbnails(id, thumbnail)),
-        favGame: (type, id, uid) => dispatch(action.addToFav(type, id, uid))
+        favGame: (props) => dispatch(action.addToFav(props))
     }
 }
 

@@ -2,7 +2,12 @@ import * as actionType from '../actions/actionTypes';
 
 const initailState = {
     rooms: {},
-    err: null
+    err: null,
+    searchValue: "",
+    orderOption: {
+        value: "Players",
+        option: "ASC"
+    }
 }
 
 const reducer = (state=initailState, action) => {
@@ -21,6 +26,11 @@ const reducer = (state=initailState, action) => {
                 ...state,
                 isFetching: false,
                 err: action.err
+            }
+         case actionType.FILTER_ROOMS:
+            return {
+                ...state,
+                searchValue: action.searchValue
             }
         default: return state;
     }

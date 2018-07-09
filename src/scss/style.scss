@@ -604,6 +604,7 @@ header {
 .main-white {
     display: flex;
     flex-direction: column;
+    min-height: 100%;
     width: 100%;
     color: #676767;
     font-size: 1rem;
@@ -612,12 +613,16 @@ header {
     box-sizing: border-box;
 }
 
+.main-white--with-header {
+    min-height: calc(100% - 220px);
+}
+
 .search {
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
-    padding: 0 15px;
+    padding: 20px 15px 0 15px;
     button {
         position: absolute;
         left: 15px;
@@ -767,7 +772,6 @@ header {
     background: url(../img/game-room-header.jpg) no-repeat center center;
     background-size: cover;
     box-sizing: border-box;
-    margin-bottom: 25px;
     a {
         margin-bottom: -50px;
         &:hover img {

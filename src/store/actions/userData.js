@@ -32,11 +32,11 @@ const addToFavSuccess = (type, favArray) => {
     }
 }
 
-export const addToFav = (type, favArray, uid) => {
+export const addToFav = ({type, array, uid}) => {
     return dispatch => {
         firebase.firestore().collection("users").doc(uid).update({
-            [type]: favArray
+            [type]: array
         })
-        .then(dispatch(addToFavSuccess(type, favArray)))
+        .then(dispatch(addToFavSuccess(type, array)))
     }
 }

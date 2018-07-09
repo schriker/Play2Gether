@@ -23,6 +23,7 @@ export const fetchRooms = (gameId) => {
 
         firebase.firestore().collection("games").doc(gameId).onSnapshot((doc) => {
             rooms = {
+                ...rooms,
                 [doc.id]: {
                     data: doc.data(),
                     rooms: []
@@ -30,10 +31,10 @@ export const fetchRooms = (gameId) => {
             };
             if(!getState().games.thumbnails[gameId]) {
                 dispatch(fetchThumbnails(gameId, rooms[gameId].data.img));
-            }  
-        }, (err) => dispatch(fetchRoomsFail(err)));
+            }
 
-        firebase.firestore().collection("games").doc(gameId).collection("rooms").onSnapshot((querySnapshot) => {
+            firebase.firestore().collection("games").doc(gameId).collection("rooms").onSnapshot((querySnapshot) => {
+            rooms[gameId].rooms = [];
             querySnapshot.forEach((doc) =>{
                 rooms = {
                     ...rooms,
@@ -50,6 +51,14 @@ export const fetchRooms = (gameId) => {
                 }
             });
             dispatch(fetchRoomsSuccess(rooms));
+            }, (err) => dispatch(fetchRoomsFail(err)));
         }, (err) => dispatch(fetchRoomsFail(err)));
+    }
+}
+
+export const filterRooms = (text) => {
+    return {
+        type: actionType.FILTER_ROOMS,
+        searchValue: text
     }
 }

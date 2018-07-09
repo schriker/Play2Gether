@@ -19,5 +19,6 @@ export {
 } from './userData';
 
 export {
-    fetchRooms
+    fetchRooms,
+    filterRooms
 } from './rooms';

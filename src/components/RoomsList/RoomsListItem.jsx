@@ -15,11 +15,11 @@ class RoomsListItem extends Component {
 
         if(!fav) {
             favRooms.push(this.props.id);
-            this.props.favRoom("favRooms", favRooms, this.props.uid);
+            this.props.favRoom({type: "favRooms", array: favRooms,  uid: this.props.uid});
         }
         else {
             const removedfavRooms = favRooms.filter((item) => item !==  this.props.id);
-            this.props.favRoom("favRooms", removedfavRooms, this.props.uid);
+            this.props.favRoom({type: "favRooms", array: removedfavRooms,  uid: this.props.uid});
         }
     }
 
@@ -50,7 +50,7 @@ class RoomsListItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        favRoom: (type, id, uid) => dispatch(action.addToFav(type, id, uid))
+        favRoom: (props) => dispatch(action.addToFav(props))
     }
 }
 
