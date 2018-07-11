@@ -32,6 +32,11 @@ const reducer = (state=initailState, action) => {
                 ...state,
                 searchValue: action.searchValue
             }
+        case actionType.ORDER_ROOMS: 
+            return {
+                ...state,
+                orderOption: action.orderOption
+            }
         default: return state;
     }
 }

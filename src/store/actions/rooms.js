@@ -62,3 +62,10 @@ export const filterRooms = (text) => {
         searchValue: text
     }
 }
+
+export const orderRooms = (orderOption) => {
+    return {
+        type: actionType.ORDER_ROOMS,
+        orderOption: orderOption
+    }
+}

@@ -8,6 +8,7 @@ import Button from '../UI/Button';
 import SearchBar from '../UI/SearchBar';
 import Filter from '../Filter/Filter';
 import { filterByValue } from '../../utility/filterHelper';
+import { ordderOptionsUpdater } from '../../utility/orderOptionsUpdate';
 
 class RoomsList extends Component {
 
@@ -22,6 +23,12 @@ class RoomsList extends Component {
                 option: "ASC"
             }
         ]
+    }
+
+    onOrder = (id, orderMethod) => {
+        const {updatedOption, updatedArr} = ordderOptionsUpdater(id, orderMethod, this.state.orderOptions);
+        this.setState({orderOptions: updatedArr});
+        this.props.orderRooms(updatedOption);
     }
     
     componentDidMount() {
@@ -98,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchRooms: (gameId) => dispatch(actions.fetchRooms(gameId)),
         onSearch: (searchValue) => dispatch(actions.filterRooms(searchValue)),
+        orderRooms: (orderOption) => dispatch(actions.orderRooms(orderOption))
     }
 }
 

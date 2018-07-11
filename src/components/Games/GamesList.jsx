@@ -7,6 +7,7 @@ import GameItem from './GameItem';
 import Loader from '../UI/Loader';
 import * as actions from '../../store/actions/index';
 import { filterByValue } from '../../utility/filterHelper';
+import { ordderOptionsUpdater } from '../../utility/orderOptionsUpdate';
 
 class GamesList extends Component {
 
@@ -37,21 +38,7 @@ class GamesList extends Component {
     }
 
     onOrder = (id, orderMethod) => {
-        const resetArr = this.state.orderOptions.map((option) => {
-            return {
-                value: option.value,
-                option: null
-            }
-        });
-        const updatedOption = {
-            ...this.state.orderOptions[id],
-            option: orderMethod
-        };
-        const updatedArr = [
-            ...resetArr.slice(0, id),
-                updatedOption,
-            ...resetArr.slice(id + 1, this.state.orderOptions.length)
-        ]
+        const {updatedOption, updatedArr} = ordderOptionsUpdater(id, orderMethod, this.state.orderOptions);
         this.setState({orderOptions: updatedArr});
         this.props.orderGames(updatedOption);
     }
