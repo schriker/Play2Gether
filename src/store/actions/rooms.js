@@ -69,3 +69,31 @@ export const orderRooms = (orderOption) => {
         orderOption: orderOption
     }
 }
+
+const addRoomStart = () => {
+    return {
+        type: actionType.ADD_ROOM_START
+    }
+}
+
+const addRoomSuccess = (roomId) => {
+    return {
+        type: actionType.ADD_ROOM_SUCCESS
+    }
+}
+
+const addRoomFail = (err) => {
+    return {
+        type: actionType.ADD_ROOM_FAIL,
+        err: err
+    }
+}
+
+export const addRoom = (data, gameId) => {
+    return dispatch => {
+        dispatch(addRoomStart());
+        firebase.firestore().collection("games").doc(gameId).collection("rooms").add(data)
+        .then((doc) => dispatch(addRoomSuccess(doc.id)))
+        .catch((err) => dispatch(addRoomFail(err)));
+    }
+}

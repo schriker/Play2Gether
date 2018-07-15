@@ -21,5 +21,6 @@ export {
 export {
     fetchRooms,
     filterRooms,
-    orderRooms
+    orderRooms,
+    addRoom
 } from './rooms';

@@ -46,6 +46,7 @@ button {
 
 input[type="text"],
 input[type="email"],
+input[type="number"],
 input[type="password"],
 select {
     font-weight: 400;
@@ -61,6 +62,7 @@ select {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="number"]:focus,
 input[type="password"]:focus {
     color: $main-blue;
     border-color: #999;
@@ -68,6 +70,7 @@ input[type="password"]:focus {
 
 input[type="text"]:focus + div,
 input[type="email"]:focus + div,
+input[type="number"]:focus + div,
 input[type="password"]:focus + div {
     border-color: #999;
 }
@@ -417,10 +420,7 @@ header {
     }
     form {
         width: 100%;
-        margin: 0 0 60px 0; 
-        div:last-of-type {
-            margin: 0 0 0 0;
-        }
+        margin: 0 0 60px 0;
     }
 
     button {
@@ -460,13 +460,13 @@ header {
         min-height: 40px;
         box-sizing: border-box;
         background-color: $err-msg-bg;
-        border-left: 10px solid $err-msg-border;
         color: $main-red;
         line-height: 1.5rem;
         font-size: 1rem;
         margin: 0 0 2px 0;
         padding: 10px 25px;
         transition: all 0.2s ease;
+        border-left: 10px solid $err-msg-border;
         }
     }
     &__ribbon {
@@ -502,7 +502,7 @@ header {
     height: 100%;
     color: $basic-white;
     font-size: 1rem;
-    min-width: 250px;
+    min-width: 270px;
     background-color: #1c2134;
     &__content {
         padding: 40px 0 0 0;
@@ -539,16 +539,21 @@ header {
         margin: 25px 0;
     }
     &__nav {
+        width: 100%;
         .sidebar__number {
             display: inline-block;
             margin-left: 15px;
         }
-        width: 100%;
+        li {
+            list-style: none;
+            width: 100%;
+        }
         li:last-child {
             margin: 40px 0;
         }
-    
         a {
+            width: 100%;
+            box-sizing: border-box;
             position: relative;
             display: block;
             color: $basic-white;
@@ -589,12 +594,12 @@ header {
         color: $icons-blue;
         font-size: 0.75rem;
         text-transform: uppercase;
-        padding: 30px 0 0 0;
+        padding: 30px 0;
     }
 }
 
 .main {
-    margin-left: 250px;
+    margin-left: 270px;
     height: 100%;
     flex-grow: 1;
     width: 100%;
@@ -673,7 +678,6 @@ header {
 }
 
 .games-list {
-    flex-grow: 1;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -700,6 +704,7 @@ header {
     }
     a {
         display: block;
+        height: 100%;
     }
     &:hover img {
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
@@ -1010,19 +1015,20 @@ header {
         left: 50%;
         top: 50%;
         z-index: 1000;
+        will-change: transform;
         transform: translate(-50.1%, -50.1%);
         width: 685px;
         max-width: 100%;
         max-height: 100%;
         background-color: $basic-white;
-        box-shadow: 2.457px 1.721px 2px 0px rgba(0, 0, 0, 0.15);
-        padding: 50px 60px;
+        box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.15);
+        padding: 50px 60px 25px 60px;
         box-sizing: border-box;
         overflow: auto;
-        input[type="text"] {
+        input[type="text"],
+        input[type="number"], {
             width: 100%;
             box-sizing: border-box;
-            // margin-bottom: 35px;
         }
         select {
             width: 100%;
@@ -1039,6 +1045,10 @@ header {
 }
 
 .form {
+    input[type="text"],
+    input[type="number"], {
+        margin-bottom: 35px;
+    }
     &__row {
         margin-bottom: 35px;
         p {

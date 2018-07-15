@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import SearchBar from '../UI/SearchBar';
 import Button from '../UI/Button';
@@ -48,23 +48,28 @@ class GamesList extends Component {
     }
 
     render() {
-        let content = <Loader type="white-bg" />;
+        let loader = <Loader type="white-bg" />;
+        let gameList = null;
 
         if(!this.props.isFetching) {
-            content = this.props.games.map((game) => <GameItem userFav={this.props.userData.favGames} key={game.id} id={game.id} name={game.name} thumbnail={game.img} players={game.players} />);
+            loader = null;
+            gameList = this.props.games.map((game) => <GameItem userFav={this.props.userData.favGames} key={game.id} id={game.id} name={game.name} thumbnail={game.img} players={game.players} />);
         }
 
         return (
-            <div className="main-white">
-                <div className="search">
-                    <Button type="grey" value="Add game" clicked={() => console.log("Add game")} />
-                    <SearchBar value={this.props.searchValue} onSearch={(e) => this.onSearchChange(e)} />
+            <Fragment>
+                {loader}
+                <div className="main-white">
+                    <div className="search">
+                        <Button type="grey" value="Add game" clicked={() => console.log("Add game")} />
+                        <SearchBar value={this.props.searchValue} onSearch={(e) => this.onSearchChange(e)} />
+                    </div>
+                    <Filter clicked={(id, method) => this.onOrder(id, method)} options={this.state.orderOptions} />
+                    <div className="games-list">
+                        {gameList}
+                    </div>
                 </div>
-                <Filter clicked={(id, method) => this.onOrder(id, method)} options={this.state.orderOptions} />
-                <div className="games-list loader-container">
-                    {content}
-                </div>
-            </div>
+            </Fragment>
         );
     }
 }

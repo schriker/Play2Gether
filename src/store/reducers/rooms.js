@@ -7,7 +7,9 @@ const initailState = {
     orderOption: {
         value: "Players",
         option: "ASC"
-    }
+    },
+    isAddingRoom: false,
+    roomAdded: false
 }
 
 const reducer = (state=initailState, action) => {
@@ -36,6 +38,23 @@ const reducer = (state=initailState, action) => {
             return {
                 ...state,
                 orderOption: action.orderOption
+            }
+        case actionType.ADD_ROOM_START:
+            return {
+                ...state,
+                isAddingRoom: true
+            }
+        case actionType.ADD_ROOM_FAIL:
+            return {
+                ...state,
+                err: action.err,
+                isAddingRoom: false
+            }
+        case actionType.ADD_ROOM_SUCCESS:
+            return {
+                ...state,
+                roomAdded: true,
+                isAddingRoom: false
             }
         default: return state;
     }

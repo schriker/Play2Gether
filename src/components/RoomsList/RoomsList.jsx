@@ -7,12 +7,14 @@ import RoomsListItem from './RoomsListItem';
 import Button from '../UI/Button';
 import SearchBar from '../UI/SearchBar';
 import Filter from '../Filter/Filter';
+import AddRoom from './AddRoom';
 import { filterByValue } from '../../utility/filterHelper';
 import { ordderOptionsUpdater } from '../../utility/orderOptionsUpdate';
 
 class RoomsList extends Component {
 
     state = {
+        showAddingForm: false,
         orderOptions: [
             {
                 value: "Name",
@@ -22,7 +24,8 @@ class RoomsList extends Component {
                 value: "Players",
                 option: "ASC"
             }
-        ]
+        ],
+        addRoom: false
     }
 
     onOrder = (id, orderMethod) => {
@@ -39,6 +42,15 @@ class RoomsList extends Component {
         this.props.onSearch(e.target.value);
     }
 
+    addRoomOpen = (e) => {
+        e.preventDefault();
+        this.setState({addRoom: true});
+    }
+
+    addRoomClose = () => {
+        this.setState({addRoom: false});
+    }
+
     render() {
 
         let game = this.props.game.rooms[this.props.match.params.id];
@@ -47,13 +59,17 @@ class RoomsList extends Component {
         let roomsList = null;
 
         if (game) {
-            contentHeader = <RoomsHeader 
-                                id={this.props.match.params.id} 
-                                name={game.data.name} 
-                                src={this.props.thumbnails[this.props.match.params.id]} 
-                                players={game.data.players} 
-                                rooms={game.rooms.length}   
-                            />;
+            contentHeader = 
+                            <Fragment>
+                                <RoomsHeader 
+                                    id={this.props.match.params.id} 
+                                    name={game.data.name} 
+                                    src={this.props.thumbnails[this.props.match.params.id]} 
+                                    players={game.data.players} 
+                                    rooms={game.rooms.length}   
+                                />
+                                <AddRoom id={this.props.match.params.id} show={this.state.addRoom} close={this.addRoomClose} settings={game.data.settings}/>
+                            </Fragment>;
 
             roomsList = this.props.rooms.map((room) => {
                 return <RoomsListItem 
@@ -61,6 +77,7 @@ class RoomsList extends Component {
                             id={room.id}
                             name={room.name}
                             players={room.players}
+                            maxPlayers={room.maxPlayers}
                             desc={room.desc}
                             region={room.region}
                             voiceChat={room.voiceChat}
@@ -77,7 +94,7 @@ class RoomsList extends Component {
                 {contentHeader}
                 <div className="main-white main-white--with-header">
                 <div className="search">
-                    <Button type="grey" value="Add room" clicked={() => console.log("Add room")} />
+                    <Button type="grey" value="Add room" clicked={(e) => this.addRoomOpen(e)} />
                     <SearchBar value={this.props.searchValue} onSearch={(e) => this.onSearchChange(e)} />
                 </div>
                 <Filter clicked={(id, method) => this.onOrder(id, method)} options={this.state.orderOptions} />

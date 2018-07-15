@@ -34,7 +34,7 @@ class RoomsListItem extends Component {
         return (
             <div className="single-room">
                 <div className="single-room__info">
-                    <RoomPlayersNumber players={this.props.players} maxPlayers={4} />
+                    <RoomPlayersNumber players={this.props.players} maxPlayers={this.props.maxPlayers} />
                     <RoomHeader name={this.props.name} desc={this.props.desc} />
                     <RoomTags tags={this.props.tags} />
                     <div className="single-room__join pull-right">

@@ -28,3 +28,7 @@ export const FETCH_ROOMS_FAIL = "FETCH_ROOMS_FAIL";
 
 export const FILTER_ROOMS = "FILTER_ROOMS";
 export const ORDER_ROOMS = "ORDER_ROOMS";
+
+export const ADD_ROOM_START = "ADD_ROOM_START";
+export const ADD_ROOM_SUCCESS = "ADD_ROOM_SUCCESS";
+export const ADD_ROOM_FAIL = "ADD_ROOM_FAIL";
