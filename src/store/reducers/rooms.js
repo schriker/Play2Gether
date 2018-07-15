@@ -9,7 +9,8 @@ const initailState = {
         option: "ASC"
     },
     isAddingRoom: false,
-    roomAdded: false
+    roomAdded: false,
+    addedRoomId: null
 }
 
 const reducer = (state=initailState, action) => {
@@ -54,6 +55,7 @@ const reducer = (state=initailState, action) => {
             return {
                 ...state,
                 roomAdded: true,
+                addedRoomId: action.roomId,
                 isAddingRoom: false
             }
         default: return state;

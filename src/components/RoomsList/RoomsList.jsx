@@ -73,6 +73,7 @@ class RoomsList extends Component {
 
             roomsList = this.props.rooms.map((room) => {
                 return <RoomsListItem 
+                            gameId={this.props.match.params.id}
                             key={room.id}
                             id={room.id}
                             name={room.name}

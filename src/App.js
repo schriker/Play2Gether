@@ -6,6 +6,7 @@ import UserLogin from './components/UserLogin/UserLogin';
 import Sidebar from './components/Sidebar/Sidebar';
 import GamesList from './components/Games/GamesList';
 import RoomsList from './components/RoomsList/RoomsList';
+import Room from './components/Room/Room';
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
               <Sidebar />
               <div className="main loader-container">
                 <Switch>
+                  <Route path="/game/:id/room/:roomId" component={Room}></Route>
                   <Route path="/game/:id" component={RoomsList}></Route>
                   <Route path="/" component={GamesList} />
                 </Switch>

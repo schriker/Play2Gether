@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import Submit from '../UI/Submit';
 import RoomTags from './RoomTags';
 import { withFormik, Form, Field } from 'formik';
+import { Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { splitTags } from '../../utility/splitTags';
 
@@ -44,6 +45,7 @@ class AddRoom extends Component {
         return (
             <CSSTransition in={this.props.show} timeout={200} classNames="fade" mountOnEnter unmountOnExit>
                 <Modal title="New room" close={this.props.close}>
+                    {this.props.addingSuccess ? <Redirect to={`/game/${this.props.id}/room/${this.props.addedRoomId}`} /> : null}
                     <Form className="form">
                         <ErrorsList errors={errorsArray} showErr={showErr} />
                         <Field type="text" name="name" placeholder="Room name" />
@@ -126,7 +128,7 @@ const formikOptions = {
                 ...tags
             ]
         };
-        api.props.addRoom(data,api.props.id);
+        api.props.addRoom(data, api.props.id);
     },
     validateOnBlur: false,
     validateOnChange: false
@@ -135,7 +137,9 @@ const formikOptions = {
 const mapStateToProps = (state) => {
     return {
         isAdding: state.rooms.isAddingRoom,
-        addingErr: state.rooms.err
+        addingErr: state.rooms.err,
+        addingSuccess: state.rooms.roomAdded,
+        addedRoomId: state.rooms.addedRoomId
     }
 }
 

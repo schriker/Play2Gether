@@ -78,7 +78,8 @@ const addRoomStart = () => {
 
 const addRoomSuccess = (roomId) => {
     return {
-        type: actionType.ADD_ROOM_SUCCESS
+        type: actionType.ADD_ROOM_SUCCESS,
+        roomId: roomId
     }
 }
 
