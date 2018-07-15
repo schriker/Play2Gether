@@ -58,6 +58,13 @@ const reducer = (state=initailState, action) => {
                 addedRoomId: action.roomId,
                 isAddingRoom: false
             }
+        case actionType.RESET_ROOM_DATA: 
+            return {
+                ...state,
+                isAddingRoom: false,
+                roomAdded: false,
+                addedRoomId: null
+            }
         default: return state;
     }
 }

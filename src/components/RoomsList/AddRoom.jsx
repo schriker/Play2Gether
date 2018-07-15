@@ -25,6 +25,10 @@ class AddRoom extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.resetData();
+    }
+
     render() {
 
         let showErr = false;
@@ -145,7 +149,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addRoom:(data, gameId) => dispatch(action.addRoom(data, gameId))
+        addRoom: (data, gameId) => dispatch(action.addRoom(data, gameId)),
+        resetData: () => dispatch(action.resetRooomData())
     }
 }
 

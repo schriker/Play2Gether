@@ -32,3 +32,5 @@ export const ORDER_ROOMS = "ORDER_ROOMS";
 export const ADD_ROOM_START = "ADD_ROOM_START";
 export const ADD_ROOM_SUCCESS = "ADD_ROOM_SUCCESS";
 export const ADD_ROOM_FAIL = "ADD_ROOM_FAIL";
+
+export const RESET_ROOM_DATA = "RESET_ROOM_DATA";

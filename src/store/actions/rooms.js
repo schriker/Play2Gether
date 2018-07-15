@@ -98,3 +98,9 @@ export const addRoom = (data, gameId) => {
         .catch((err) => dispatch(addRoomFail(err)));
     }
 }
+
+export const resetRooomData = () => {
+    return {
+        type: actionType.RESET_ROOM_DATA
+    }
+}

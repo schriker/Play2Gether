@@ -22,5 +22,6 @@ export {
     fetchRooms,
     filterRooms,
     orderRooms,
-    addRoom
+    addRoom,
+    resetRooomData
 } from './rooms';
