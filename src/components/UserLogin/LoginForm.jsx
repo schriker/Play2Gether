@@ -37,7 +37,7 @@ const LoginForm = (props) => {
                 <div className="login-box__row login-box__buttons">
                     <Submit isSending={props.loginLoading} value="Login" />
                     <span>or</span>
-                    <Button value="Sign Up" type="grey" clicked={(e) => props.showRegister(e)} />
+                    <Button value="Sign Up" type="grey" clicked={() => props.showRegister()} />
                     <a className="pull-right" href="">Forgot password?</a>
                 </div>
             </Form>

@@ -9,8 +9,7 @@ class UserLogin extends Component {
         showRegister: false,
     }
 
-    showRegister = (e) => {
-        e.preventDefault();
+    showRegister = () => {
         this.setState({showRegister: true});
     }
 
