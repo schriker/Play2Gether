@@ -34,3 +34,6 @@ export const ADD_ROOM_SUCCESS = "ADD_ROOM_SUCCESS";
 export const ADD_ROOM_FAIL = "ADD_ROOM_FAIL";
 
 export const RESET_ROOM_DATA = "RESET_ROOM_DATA";
+
+export const FETCH_ROOM_SUCCESS = "FETCH_ROOM_SUCCESS";
+export const FETCH_ROOM_FAIL = "FETCH_ROOM_FAIL";

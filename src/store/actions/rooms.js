@@ -29,6 +29,7 @@ export const fetchRooms = (gameId) => {
                     rooms: []
                 } 
             };
+            
             if(!getState().games.thumbnails[gameId]) {
                 dispatch(fetchThumbnails(gameId, rooms[gameId].data.img));
             }
