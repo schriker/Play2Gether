@@ -81,7 +81,7 @@ class RoomsList extends Component {
                             maxPlayers={room.maxPlayers}
                             desc={room.desc}
                             region={room.region}
-                            voiceChat={room.voiceChat}
+                            voiceChat={room.voice}
                             tags={room.tags}
                             platform={room.platform}
                             userFav={this.props.userData.favRooms}
