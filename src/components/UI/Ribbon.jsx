@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import FavButton from './FavButton';
 
 const Ribbon = (props) => {
     
@@ -16,6 +17,7 @@ const Ribbon = (props) => {
     if(props.maxPlayers) {
         players = <Fragment>
                     <div className="ribbon__stats"><span className="text-red"><i className="fas fa-users"></i></span>{props.players} of {props.maxPlayers}</div>
+                    <div className="ribbon__stats"><FavButton isFaved={props.isFaved} favList={(fav) => props.favList(fav)} /></div>
                 </Fragment> 
     }
 

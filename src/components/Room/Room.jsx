@@ -16,7 +16,26 @@ class Room extends Component {
         this.props.fetchRooms(this.gameId);
     }
 
+    favRoom(fav) {
+        const favRooms = [...this.props.userData.favRooms];
+
+        if(!fav) {
+            favRooms.push(this.roomId);
+            this.props.favRoom({type: "favRooms", array: favRooms,  uid: this.props.uid});
+        }
+        else {
+            const removedfavRooms = favRooms.filter((item) => item !==  this.roomId);
+            this.props.favRoom({type: "favRooms", array: removedfavRooms,  uid: this.props.uid});
+        }
+    }
+
     render() {
+
+        let isFaved = false;
+
+        if (this.props.userData.favRooms) {
+            isFaved = this.props.userData.favRooms.includes(this.roomId);
+        }
 
         let filterRooms = [];
         let singleRoom = {}
@@ -36,6 +55,8 @@ class Room extends Component {
                                 src={this.props.thumbnail[this.gameId]}
                                 maxPlayers={singleRoom.maxPlayers}
                                 players={singleRoom.players}
+                                isFaved={isFaved} 
+                                favList={(fav) => this.favRoom(fav)}
                             />
         }
 
@@ -50,13 +71,16 @@ class Room extends Component {
 const mapStateToProps = (state) => {
     return {
         thumbnail: state.games.thumbnails,
-        rooms: state.rooms.rooms
+        rooms: state.rooms.rooms,
+        userData: state.userData.userData,
+        uid: state.auth.user.uid
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchRooms: (gameId) => dispatch(actions.fetchRooms(gameId))
+        fetchRooms: (gameId) => dispatch(actions.fetchRooms(gameId)),
+        favRoom: (props) => dispatch(actions.addToFav(props))
     }
 }
 
