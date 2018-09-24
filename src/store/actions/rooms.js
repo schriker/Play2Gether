@@ -91,11 +91,23 @@ const addRoomFail = (err) => {
     }
 }
 
+const addChat = (id) => {
+    return dispatch => {
+        const data = {
+            owner: "Test",
+            messages: []
+        }
+        firebase.firestore().collection("chats").doc(id).set(data)
+        .then(() => dispatch(addRoomSuccess(id)))
+        .catch((err) => dispatch(addRoomFail(err)));
+    }
+}
+
 export const addRoom = (data, gameId) => {
     return dispatch => {
         dispatch(addRoomStart());
         firebase.firestore().collection("games").doc(gameId).collection("rooms").add(data)
-        .then((doc) => dispatch(addRoomSuccess(doc.id)))
+        .then((doc) => dispatch(addChat(doc.id)))
         .catch((err) => dispatch(addRoomFail(err)));
     }
 }

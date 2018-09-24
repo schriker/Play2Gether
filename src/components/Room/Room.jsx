@@ -5,6 +5,7 @@ import Loader from '../UI/Loader';
 import RoomsHeader from '../RoomsList/RoomsHeader';
 import RoomTags from '../RoomsList/RoomTags';
 import RoomOptions from '../RoomsList/RoomOptions';
+import RoomChat from '../Room/RoomChat';
 
 class Room extends Component {
 
@@ -52,8 +53,6 @@ class Room extends Component {
                 ...filterRooms[0]
             };
 
-            console.log(singleRoom);
-
             contentHeader = <RoomsHeader 
                                 id={this.gameId}
                                 name={singleRoom.name}
@@ -79,7 +78,7 @@ class Room extends Component {
                 {contentHeader}
                 <div className="main-white main-white--with-header">
                     {roomInfo}
-                    {/* Room content goes here */}
+                    <RoomChat />
                 </div>
             </Fragment>
         );
