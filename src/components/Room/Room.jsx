@@ -36,15 +36,15 @@ class Room extends Component {
     render() {
 
         let isFaved = false;
+        let filterRooms = [];
+        let singleRoom = {}
+        let contentHeader = <Loader type="white-bg" />;
+        let roomInfo = null;
 
         if (this.props.userData.favRooms) {
             isFaved = this.props.userData.favRooms.includes(this.roomId);
         }
 
-        let filterRooms = [];
-        let singleRoom = {}
-        let contentHeader = <Loader type="white-bg" />;
-        let roomInfo = null;
 
         if(this.props.rooms[this.gameId]) {
 
@@ -79,7 +79,7 @@ class Room extends Component {
                 {contentHeader}
                 <div className="main-white main-white--with-header">
                     {roomInfo}
-                    <RoomChat />
+                    <RoomChat messages={this.props.chat.messages} />
                 </div>
             </Fragment>
         );
@@ -91,7 +91,8 @@ const mapStateToProps = (state) => {
         thumbnail: state.games.thumbnails,
         rooms: state.rooms.rooms,
         userData: state.userData.userData,
-        uid: state.auth.user.uid
+        uid: state.auth.user.uid,
+        chat: state.chat
     }
 }
 
