@@ -17,6 +17,7 @@ class Room extends Component {
 
     componentDidMount() {
         this.props.fetchRooms(this.gameId);
+        this.props.fethcMessage(this.roomId);
     }
 
     favRoom(fav) {
@@ -97,6 +98,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchRooms: (gameId) => dispatch(actions.fetchRooms(gameId)),
+        fethcMessage: (roomId) => dispatch(actions.fethcMessage(roomId)),
         favRoom: (props) => dispatch(actions.addToFav(props))
     }
 }

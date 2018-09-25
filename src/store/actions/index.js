@@ -25,3 +25,7 @@ export {
     addRoom,
     resetRooomData
 } from './rooms';
+
+export { 
+    fethcMessage 
+} from './chat';

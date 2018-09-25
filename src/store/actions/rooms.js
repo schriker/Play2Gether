@@ -94,7 +94,6 @@ const addRoomFail = (err) => {
 const addChat = (id) => {
     return dispatch => {
         const data = {
-            owner: "Test",
             messages: []
         }
         firebase.firestore().collection("chats").doc(id).set(data)
