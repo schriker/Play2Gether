@@ -47,8 +47,8 @@ const LoginForm = (props) => {
 const formikOptions = {
     mapPropsToValues: () => {
         return {
-            email: "",
-            password: ""
+            email: "demo@demo.com",
+            password: "demo123456"
         }
     },
     validationSchema: () => Yup.object().shape({
