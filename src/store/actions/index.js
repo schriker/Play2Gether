@@ -27,5 +27,6 @@ export {
 } from './rooms';
 
 export { 
-    fethcMessage 
+    fethcMessage,
+    sendMessage
 } from './chat';

@@ -91,13 +91,16 @@ const addRoomFail = (err) => {
     }
 }
 
-const addChat = (id) => {
+const addChat = (gameId ,roomId) => {
     return dispatch => {
         const data = {
-            messages: []
+            uid: null,
+            author: "admin",
+            time: firebase.firestore.FieldValue.serverTimestamp(),
+            message: "Welcome to your room! Yo can now chat with other players."
         }
-        firebase.firestore().collection("chats").doc(id).set(data)
-        .then(() => dispatch(addRoomSuccess(id)))
+        firebase.firestore().collection("chats").doc(gameId).collection(roomId).add(data)
+        .then(() => dispatch(addRoomSuccess(roomId)))
         .catch((err) => dispatch(addRoomFail(err)));
     }
 }
@@ -106,7 +109,7 @@ export const addRoom = (data, gameId) => {
     return dispatch => {
         dispatch(addRoomStart());
         firebase.firestore().collection("games").doc(gameId).collection("rooms").add(data)
-        .then((doc) => dispatch(addChat(doc.id)))
+        .then((doc) => dispatch(addChat(gameId, doc.id)))
         .catch((err) => dispatch(addRoomFail(err)));
     }
 }

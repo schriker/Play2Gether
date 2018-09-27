@@ -17,7 +17,7 @@ class Room extends Component {
 
     componentDidMount() {
         this.props.fetchRooms(this.gameId);
-        this.props.fethcMessage(this.roomId);
+        this.props.fethcMessage(this.gameId, this.roomId);
     }
 
     favRoom(fav) {
@@ -79,7 +79,7 @@ class Room extends Component {
                 {contentHeader}
                 <div className="main-white main-white--with-header">
                     {roomInfo}
-                    <RoomChat messages={this.props.chat.messages} />
+                    <RoomChat gameId={this.gameId} roomId={this.roomId} messages={this.props.chat.messages} />
                 </div>
             </Fragment>
         );
@@ -99,7 +99,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchRooms: (gameId) => dispatch(actions.fetchRooms(gameId)),
-        fethcMessage: (roomId) => dispatch(actions.fethcMessage(roomId)),
+        fethcMessage: (gameId, roomId) => dispatch(actions.fethcMessage(gameId, roomId)),
         favRoom: (props) => dispatch(actions.addToFav(props))
     }
 }

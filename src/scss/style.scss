@@ -454,6 +454,8 @@ header {
         box-sizing: border-box;
     }
     &__err-msg {
+        width: 100%;
+        flex: 1 0 auto;
         margin-bottom: 35px;
         p {
         width: 100%;
@@ -619,7 +621,7 @@ header {
 }
 
 .main-white--with-header {
-    min-height: calc(100% - 220px);
+    min-height: calc(100% - 245px);
 }
 
 .search {
@@ -879,6 +881,9 @@ header {
 // Chat Styles 
 
 .room {
+    overflow: auto;
+    flex: 1 1 auto;
+    max-height: 100%;
     display: flex;
     margin: 0 -15px -30px -15px;
     border-top: 1px solid #ebebeb;
@@ -886,21 +891,35 @@ header {
         display: flex;
         flex-direction: column;
         width: 80%;
-        padding: 65px;
         border-right: 1px solid #ebebeb;
         form {
-            width: 100%;
             display: flex;
-            margin-top: 35px;
+            flex-wrap: wrap;
+            padding: 35px 65px;
         }
         input[type="text"] {
             width: 100%;
             border-right: 0;
         }
+        button {
+            padding: 19px;
+        }
+    }
+    &__row {
+        width: 100%;
+        display: flex;
+    }
+    &__messages {
+        height: 300px;
+        flex: 1 1 auto;
+        max-height: 100%;
+        overflow: auto;
+        padding: 35px 65px 0 65px;
+        border-bottom: 1px solid #ebebeb;
     }
     &__users {
         width: 20%;
-        padding: 65px;
+        padding: 35px;
         display: flex;
         flex-direction: column;
     }
@@ -908,6 +927,7 @@ header {
 
 .msg,
 .user-msg {
+    position: relative;
     display: flex;
     width: 70%;
     align-items: flex-start;
