@@ -79,7 +79,7 @@ class Room extends Component {
                 {contentHeader}
                 <div className="main-white main-white--with-header">
                     {roomInfo}
-                    <RoomChat gameId={this.gameId} roomId={this.roomId} messages={this.props.chat.messages} />
+                    <RoomChat uid={this.props.uid} gameId={this.gameId} roomId={this.roomId} messages={this.props.chat.messages} />
                 </div>
             </Fragment>
         );

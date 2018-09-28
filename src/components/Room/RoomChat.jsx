@@ -6,7 +6,7 @@ import RoomForm from './RoomForm';
 class RoomChat extends Component {
 
     scrollToBottom = () => {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        this.messagesEnd.scrollIntoView();
     }
     
     componentDidMount() {
@@ -22,8 +22,8 @@ class RoomChat extends Component {
         <div className="room">
             <div className="room__chat">
                 <div className="room__messages">
-                    {this.props.messages.map((msg, index) => <Message key={index} message={msg.message} author={msg.author} time={msg.time} />)}
-                    <div ref={(el) => {this.messagesEnd = el;}}></div>
+                    {this.props.messages.map((msg, index) => <Message uid={this.props.uid} authorUid={msg.uid} key={index} message={msg.message} author={msg.author} time={msg.time} />)}
+                    <div className="room__scrollTo" ref={(el) => {this.messagesEnd = el;}}></div>
                 </div>
                 <RoomForm gameId={this.props.gameId} roomId={this.props.roomId} />
             </div>

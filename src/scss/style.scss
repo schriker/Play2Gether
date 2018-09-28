@@ -905,6 +905,9 @@ header {
             padding: 19px;
         }
     }
+    &__scrollTo {
+        clear: both;
+    }
     &__row {
         width: 100%;
         display: flex;
@@ -931,7 +934,7 @@ header {
     display: flex;
     width: 70%;
     align-items: flex-start;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
     &__avatar {
         position: relative;
         color: #969696;
@@ -980,7 +983,7 @@ header {
 }
 
 .user-msg {
-    align-self: flex-end;
+    float: right;
     &__avatar {
         order: 2;
         color: #8f92b0;
