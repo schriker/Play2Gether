@@ -1,6 +1,6 @@
 # Play2Gether
 
-[Demo](https://play2gether-53910.firebaseapp.com/) - alpha of alpha version.
+[Demo](https://p2g.janusmarcin.pl/) - alpha of alpha version.
 
 Social platform for gamers that will allow find people for cooperative or multiplayer games.  
 
@@ -22,9 +22,9 @@ App is build with:
 * Users can add games/rooms to their favorites
 * Users can enter games/rooms
 * Users can add new rooms
+* Users can chat in room view
 
 ## To do
-* Room view. Where users can chat
 * Favorites view
 * Private messages
 * Adding user to friends
@@ -47,3 +47,10 @@ To build project:
 
 *All project files are located in ./src/*
 
+## Changelog
+
+### v0.2-alpha - 05.10.2018
+
+* Added single room view witch chat when players can spam some messages. Right now everyone can enter the room and chat. Need to add ability to join the room.
+* Added custom domain.
+* Fixed some bugs.
