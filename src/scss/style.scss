@@ -915,8 +915,9 @@ header {
     &__messages {
         height: 300px;
         flex: 1 1 auto;
-        max-height: 100%;
         overflow: auto;
+        max-height: 100%;
+        position: relative;
         padding: 35px 65px 0 65px;
         border-bottom: 1px solid #ebebeb;
     }

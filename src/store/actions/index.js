@@ -28,5 +28,6 @@ export {
 
 export { 
     fethcMessage,
-    sendMessage
+    sendMessage,
+    clearChat
 } from './chat';

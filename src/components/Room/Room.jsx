@@ -20,6 +20,10 @@ class Room extends Component {
         this.props.fethcMessage(this.gameId, this.roomId);
     }
 
+    componentWillUnmount() {
+        this.props.clearChat();
+    }
+
     favRoom(fav) {
         const favRooms = [...this.props.userData.favRooms];
 
@@ -100,7 +104,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchRooms: (gameId) => dispatch(actions.fetchRooms(gameId)),
         fethcMessage: (gameId, roomId) => dispatch(actions.fethcMessage(gameId, roomId)),
-        favRoom: (props) => dispatch(actions.addToFav(props))
+        favRoom: (props) => dispatch(actions.addToFav(props)),
+        clearChat: () => dispatch(actions.clearChat())
     }
 }
 

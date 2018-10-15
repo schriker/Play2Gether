@@ -1,7 +1,7 @@
 import * as actionType from '../actions/actionTypes';
 
 const initialState = {
-    messages: [],
+    messages: null,
     loading: true,
     sending: false,
     err: null
@@ -38,6 +38,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 sending: false,
                 err: action.err
+            }
+        case actionType.CLEAR_CHAT:
+            return {
+                ...state,
+                messages: null
             }
         default: return state
     }

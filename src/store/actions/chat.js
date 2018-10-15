@@ -67,3 +67,9 @@ export const sendMessage = (formData, gameId, roomId) => {
         .catch((err) => dispatch(sendMessageFail(err)));
     }
 }
+
+export const clearChat = () => {
+    return {
+        type: actionType.CLEAR_CHAT
+    }
+}

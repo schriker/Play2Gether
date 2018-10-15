@@ -18,11 +18,18 @@ class RoomChat extends Component {
     }
 
     render() {
+
+        let messages = null;
+
+        if (this.props.messages) {
+            messages = this.props.messages.map((msg, index) => <Message uid={this.props.uid} authorUid={msg.uid} key={index} message={msg.message} author={msg.author} time={msg.time} />);
+        }
+
         return (
         <div className="room">
             <div className="room__chat">
                 <div className="room__messages">
-                    {this.props.messages.map((msg, index) => <Message uid={this.props.uid} authorUid={msg.uid} key={index} message={msg.message} author={msg.author} time={msg.time} />)}
+                    {messages}
                     <div className="room__scrollTo" ref={(el) => {this.messagesEnd = el;}}></div>
                 </div>
                 <RoomForm gameId={this.props.gameId} roomId={this.props.roomId} />
