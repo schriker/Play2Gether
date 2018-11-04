@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import Layout from './components/Layout/Layout';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UserLogin from './components/UserLogin/UserLogin';
-import Sidebar from './components/Sidebar/Sidebar';
-import GamesList from './components/Games/GamesList';
-import RoomsList from './components/RoomsList/RoomsList';
-import Room from './components/Room/Room';
 import { authStateChange } from './store/actions/index';
+
+const GamesList = React.lazy(() => import('./components/Games/GamesList'));
+const RoomsList = React.lazy(() => import('./components/RoomsList/RoomsList'));
+const Room = React.lazy(() => import('./components/Room/Room'));
+const Sidebar = React.lazy(() => import('./components/Sidebar/Sidebar'));
 
 class App extends Component {
 
@@ -36,14 +37,16 @@ class App extends Component {
         <Router>
           <Layout>
             <div className="container">
-              <Sidebar />
-              <div className="main loader-container">
-                <Switch>
-                  <Route path="/game/:id/room/:roomId" component={Room} />
-                  <Route path="/game/:id" component={RoomsList} />
-                  <Route path="/" component={GamesList} />
-                </Switch>
-              </div>
+              <Suspense fallback={<div>Loading...</div>}>
+                <Sidebar />
+                <div className="main loader-container">
+                    <Switch>
+                      <Route path="/game/:id/room/:roomId" component={Room} />
+                      <Route path="/game/:id" component={RoomsList} />
+                      <Route path="/" component={GamesList} />
+                    </Switch>
+                </div>
+              </Suspense>
             </div>
           </Layout>
         </Router>
