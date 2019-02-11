@@ -14,9 +14,12 @@ class GameThumbnail extends Component {
     }
 
     render() {
+
+        const loader = this.state.imgLoaded ? null : <Loader type="grey-bg" />;
+
         return (
             <Link to={`/game/${this.props.id}`} className="loader-container">
-                <Loader type="grey-bg" />
+                {loader}
                 <img width={this.props.width} className="fluid-img" src={placeholder} alt="Placeholder" />
                 <img 
                     width={this.props.width}
