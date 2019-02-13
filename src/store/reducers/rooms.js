@@ -2,7 +2,7 @@ import * as actionType from '../actions/actionTypes';
 
 const initailState = {
     rooms: {},
-    err: null,
+    err: {},
     searchValue: "",
     orderOption: {
         value: "Players",

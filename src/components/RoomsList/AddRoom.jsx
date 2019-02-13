@@ -10,6 +10,7 @@ import { withFormik, Form, Field } from 'formik';
 import { Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { splitTags } from '../../utility/splitTags';
+import errorHandler from '../../utility/errorsHandler';
 
 
 class AddRoom extends Component {
@@ -31,21 +32,8 @@ class AddRoom extends Component {
 
     render() {
 
-        let showErr = false;
-        const errorsArray = [];
-    
-        if (Object.keys(this.props.errors).length > 0)  {
-            showErr = true;
-            for (let key in this.props.errors) {
-                errorsArray.push(this.props.errors[key]);
-            }
-        }
-    
-        if (this.props.addingErr)  {
-            showErr = true;
-            errorsArray.push(this.props.addingErr);
-        }
-    
+        const { errorsArray, showErr } = errorHandler(this.props.errors, this.props.addingErr);
+            
         return (
             <CSSTransition in={this.props.show} timeout={200} classNames="fade" mountOnEnter unmountOnExit>
                 <Modal title="New room" close={this.props.close}>

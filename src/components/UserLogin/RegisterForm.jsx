@@ -7,22 +7,11 @@ import { CSSTransition } from 'react-transition-group';
 import { withFormik, Form, Field } from 'formik';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import errorHandler from '../../utility/errorsHandler';
 
 const RegisterForm = (props) => {
-        let showErr = false;
-        const errorsArray = [];
 
-        if (Object.keys(props.errors).length > 0)  {
-            showErr = true;
-            for (let key in props.errors) {
-                errorsArray.push(props.errors[key]);
-            }
-        }
-
-        if (Object.keys(props.registerErr).length > 0)  {
-            showErr = true;
-            errorsArray.push(props.registerErr.message);
-        }
+        const { errorsArray, showErr } = errorHandler(props.errors, props.registerErr);
     
         return (
             <CSSTransition in={props.showRegister} timeout={200} classNames="fade" mountOnEnter unmountOnExit>

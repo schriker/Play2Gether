@@ -6,23 +6,12 @@ import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import errorHandler from '../../utility/errorsHandler';
 
 const LoginForm = (props) => {
-        let showErr = false;
-        const errorsArray = [];
 
-        if (Object.keys(props.errors).length > 0)  {
-            showErr = true;
-            for (let key in props.errors) {
-                errorsArray.push(props.errors[key]);
-            }
-        }
-
-        if (Object.keys(props.loginErr).length > 0)  {
-            showErr = true;
-            errorsArray.push(props.loginErr.message);
-        }
-
+        const { errorsArray, showErr } = errorHandler(props.errors, props.loginErr);
+        
         return (        
             <Form>
                 <ErrorsList errors={errorsArray} showErr={showErr} />
